@@ -3,58 +3,69 @@
 Bonjour,  
 Je suis titulaire d’un **BTS CIEL option IR** et je poursuis une montée en compétences en **administration systèmes et réseaux** à travers des projets personnels documentés.
 
-Ces projets ont pour objectif de reproduire des **cas concrets d’entreprise** :  
-authentification centralisée, sécurité réseau, virtualisation, services Linux.
+Ces projets reproduisent des **scénarios réalistes d’entreprise**, incluant :  
+- Authentification centralisée  
+- Sécurité réseau et VPN  
+- Virtualisation et Homelab  
+- Services Linux et Windows Server  
+- Séparation des privilèges utilisateurs / administrateurs  
 
 ---
 
 ## 🧠 Compétences abordées
-- Administration Linux (Debian)
-- Réseau & sécurité (pfSense, VPN, firewall)
-- Active Directory & authentification (Kerberos, SSSD, PAM)
-- Virtualisation & homelab
+- Administration Linux (Debian) et Windows Server
+- Réseau & sécurité : pfSense, VPN, firewall, NAT
+- Active Directory & authentification : Kerberos, SSSD, PAM
+- Virtualisation & homelab multi-OS
 - Séparation des privilèges utilisateurs / administrateurs
-- Documentation technique
+- Sécurisation de services web (HTTPS, headers, durcissement) 
+- Documentation technique et bonnes pratiques professionnelles
 
 ---
 
 ## 📂 Projets principaux
 
 ### 🔐 Active Directory Linux (Debian)
-- Intégration de machines Linux à un domaine
-- Authentification via Kerberos
-- Gestion des droits avec SSSD et PAM
-- Séparation utilisateurs standards / administrateurs
+- Intégration de machines Linux à un domaine  
+- Authentification centralisée via **Kerberos**  
+- Gestion des droits utilisateurs avec **SSSD et PAM**  
+- Séparation des utilisateurs standards et administrateurs 
 
 📁 Dossier : `Projet-ActiveDirectory-Debian`
+🔗 [README détaillé](Projet-ActiveDirectory-Debian/README.md) pour plus d’informations
 
 ---
 
 ### 🌐 Homelab virtualisé avec pfSense
-- Infrastructure virtualisée
-- Pare-feu pfSense
-- Cloisonnement réseau
-- Environnements Linux et Windows Server
+- Infrastructure multi-OS (Linux + Windows Server) virtualisée  
+- **Pare-feu pfSense** pour gérer le LAN/WAN et le filtrage des flux  
+- Simulation d’un réseau interne d’entreprise  
+- Expérimentation de NAT, firewall et isolation réseau
 
 📁 Dossier : `Projet-Homelab-pfSense`
+🔗 [README détaillé](Projet-Homelab-pfSense/README.md)
 
 ---
 
 ### 🔒 Serveur VPN WireGuard
-- Accès distant sécurisé
-- Déployé sur Raspberry Pi
-- Gestion des clés et des pairs
+- Accès distant sécurisé depuis Internet  
+- Déploiement sur **Raspberry Pi 5**  
+- Gestion des clés et configuration multi-clients  
+- Résolution de problèmes liés au firewall et au routage
 
 📁 Dossier : `Projet-VPN-WireGuard`
+🔗 [README détaillé](Projet-VPN-WireGuard/README.md)
 
 ---
 
 ### 🖥️ Serveur Web Apache sécurisé
-- HTTPS (Let’s Encrypt / Certbot)
-- Headers de sécurité
-- Isolation du réseau local
+- Hébergement d’un portfolio personnel  
+- **HTTPS** avec Let’s Encrypt / Certbot  
+- Mise en place de headers de sécurité (CSP, HSTS, X-Frame-Options…)  
+- Isolation du réseau local et durcissement du serveur 
 
 📁 Dossier : `Projet-Serveur-Web-Apache`
+🔗 [README détaillé](Projet-Serveur-Web-Apache/README.md)
 
 ---
 
