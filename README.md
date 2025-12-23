@@ -43,7 +43,7 @@ Ces projets reproduisent des **scénarios réalistes d’entreprise**, incluant 
 - Expérimentation de NAT, firewall et isolation réseau
 
 📁 Dossier : `Projet-Homelab-pfSense`
-🔗 [README détaillé](Projet-Homelab-pfSense/README.md)
+🔗 [README détaillé](Projet-Homelab-pfSense/README.md) pour plus d’informations
 
 ---
 
@@ -54,7 +54,7 @@ Ces projets reproduisent des **scénarios réalistes d’entreprise**, incluant 
 - Résolution de problèmes liés au firewall et au routage
 
 📁 Dossier : `Projet-VPN-WireGuard`
-🔗 [README détaillé](Projet-VPN-WireGuard/README.md)
+🔗 [README détaillé](Projet-VPN-WireGuard/README.md) pour plus d’informations
 
 ---
 
@@ -65,7 +65,7 @@ Ces projets reproduisent des **scénarios réalistes d’entreprise**, incluant 
 - Isolation du réseau local et durcissement du serveur 
 
 📁 Dossier : `Projet-Serveur-Web-Apache`
-🔗 [README détaillé](Projet-Serveur-Web-Apache/README.md)
+🔗 [README détaillé](Projet-Serveur-Web-Apache/README.md) pour plus d’informations
 
 ---
 
