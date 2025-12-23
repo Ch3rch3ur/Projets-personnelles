@@ -1,0 +1,5 @@
+id simple-user@homelab.local
+ssh simple-user@homelab.local@IP
+ssh Administrateur@homelab.local@IP
+sudo whoami
+

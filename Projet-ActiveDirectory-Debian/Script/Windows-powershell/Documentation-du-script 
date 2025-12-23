@@ -1,0 +1,14 @@
+SCRIPT 1 — Windows Server 2022 (PowerShell)
+
+👉 À exécuter sur le contrôleur de domaine
+👉 Suppose que le domaine homelab.local existe déjà
+
+📌 Ce script :
+
+crée linux-users et linux-admins
+
+crée un utilisateur Linux non-admin
+
+ajoute les admins Linux
+
+ne touche pas à AD DS / DNS (volontaire)
