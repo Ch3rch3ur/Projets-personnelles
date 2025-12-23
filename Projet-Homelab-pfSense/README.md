@@ -10,15 +10,68 @@ Ce projet a été réalisé dans un cadre d’autoformation après l’obtention
 
 ---
 
-## 🏗️ Architecture
-- Environnement virtualisé basé sur **VirtualBox**
+## 🏗️ Architecture générale
+- Infrastructure virtualisée
 - Système hôte : **Kali Linux**
 - Pare-feu dédié : **pfSense**
 - Séparation réseau :
   - **WAN** : connecté à la box Internet
   - **LAN** : réseau interne isolé
+- Machines virtuelles :
+  - Linux (Debian)
+  - Windows Server 2022 (version d’évaluation 180 jours)
+- Réseau séparé du réseau local principal
 
-📌 Un schéma de la topologie réseau est disponible dans le dossier `diagrammes/`.
+📌 Un schéma de l’architecture est disponible dans le dossier `diagrammes/`.
+
+---
+
+## 🌐 Réseau & sécurité
+
+### Pare-feu
+- pfSense utilisé comme pare-feu principal
+- Règles de filtrage configurées pour contrôler les flux entrants et sortants
+- Accès restreint entre les machines selon leur rôle
+
+### NAT
+- NAT fonctionnel mais **limité** en raison de contraintes matérielles
+- Une seule carte réseau physique disponible sur la machine hôte
+
+👉 Cette contrainte a été prise en compte volontairement afin de travailler malgré un environnement non idéal, comme cela peut arriver en entreprise.
+
+---
+
+## 🔌 VLAN
+Les VLAN ne sont **pas implémentés dans ce homelab** pour les raisons suivantes :
+- Limitation matérielle (une seule interface réseau)
+- Les concepts VLAN ont déjà été pratiqués en ligne de commande dans un autre contexte
+
+📌 En environnement réel, des VLAN auraient été utilisés pour séparer :
+- Utilisateurs
+- Serveurs
+- Administration
+- DMZ
+
+---
+
+## 🖥️ Systèmes déployés
+- **Linux (Debian)** :
+  - Services systèmes
+  - Tests d’intégration réseau
+- **Windows Server 2022** :
+  - Environnement serveur
+  - Tests de rôles et services Windows
+
+---
+
+## ⚙️ Mise en œuvre
+### Prérequis
+- Hyperviseur (environnement virtualisé)
+- pfSense
+- Images ISO Linux et Windows Server
+- Accès réseau contrôlé
+
+Les étapes de configuration détaillées sont disponibles dans la documentation associée.
 
 ---
 
@@ -42,47 +95,30 @@ Ce projet a été réalisé dans un cadre d’autoformation après l’obtention
 
 ---
 
-## ⚠️ Problème rencontré
-Par défaut, VirtualBox ne proposait pas automatiquement plusieurs adaptateurs réseau sur Kali Linux.
-
-### Analyse
-- Nécessité de comprendre et manipuler les différents modes réseau de VirtualBox :
-  - NAT
-  - Bridged
-  - Internal network
-
-### Solution
-- Configuration manuelle des interfaces réseau via la commande :
-  - `VBoxManage`
-- Vérification du bon fonctionnement des interfaces côté pfSense
-
-Cette étape a permis de mieux comprendre l’impact des modes réseau sur l’architecture globale.
-
----
-
 ## ✅ Résultats obtenus
-- Réseau virtuel isolé derrière pfSense
-- Accès Internet fonctionnel depuis le LAN
-- Infrastructure stable et réutilisable
-- Possibilité d’expérimenter différents scénarios :
-  - règles de firewall
-  - segmentation réseau
-  - hébergement de services internes
+- Infrastructure fonctionnelle et isolée du réseau local
+- Pare-feu pfSense opérationnel
+- Communication contrôlée entre les machines virtuelles
+- Compréhension concrète des flux réseau et des règles de filtrage
 
 ---
 
-## 🧠 Compétences mises en œuvre
-- Déploiement et configuration d’un pare-feu pfSense
-- Gestion de la segmentation réseau LAN / WAN
-- Compréhension et configuration des modes réseau VirtualBox
-- Conception d’une infrastructure réseau virtualisée
-- Mise en place d’un environnement de test proche d’un réseau d’entreprise
+## ⚠️ Problèmes rencontrés
+- Limitations liées à la présence d’une seule carte réseau
+- Contraintes sur le NAT et la segmentation
+- Ajustement des règles firewall pour éviter les blocages involontaires
+
+Ces difficultés ont permis de mieux comprendre :
+- l’impact du matériel sur l’architecture réseau
+- l’importance de la segmentation
+- le rôle central du pare-feu dans une infrastructure
 
 ---
 
-## 🚀 Évolutions possibles (vision entreprise)
-- Mise en place de VLAN
-- Intégration d’un Active Directory
-- Déploiement d’IDS / IPS
+## 🚀 Améliorations possibles (vision entreprise)
+- Mise en place de VLAN avec matériel adapté
+- Ajout d’une DMZ
 - Supervision réseau
 - Centralisation des logs
+- Sauvegarde et restauration de la configuration pfSense
+
