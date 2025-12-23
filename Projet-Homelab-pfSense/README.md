@@ -1,101 +1,88 @@
 # Homelab virtualisé – pfSense & environnements multi-OS
 
 ## 🎯 Objectif du projet
-Concevoir et déployer un homelab virtualisé afin de comprendre le fonctionnement d’une infrastructure réseau et système proche d’un environnement professionnel, en mettant l’accent sur la sécurité, le cloisonnement et la gestion des flux réseau.
+Concevoir et déployer un homelab réseau virtualisé afin de simuler une infrastructure d’entreprise, avec un pare-feu dédié, une séparation LAN/WAN et la possibilité d’intégrer plusieurs machines clientes et serveurs internes.
 
 ---
 
 ## 🧠 Contexte
-Ce projet a été réalisé dans un cadre d’autoformation après l’obtention de mon **BTS CIEL option IR**.  
-L’objectif était de mettre en pratique des notions vues en cours (firewall, NAT, segmentation, services systèmes) dans un environnement concret et maîtrisé.
+Ce projet a été réalisé dans un cadre d’autoformation après l’obtention de mon **BTS CIEL option IR**, dans le but de développer mes compétences en administration systèmes et réseaux à travers un environnement de test proche des conditions réelles.
 
 ---
 
-## 🏗️ Architecture générale
-- Infrastructure virtualisée
-- Pare-feu **pfSense** en frontal
-- Machines virtuelles :
-  - Linux (Debian)
-  - Windows Server 2022 (version d’évaluation 180 jours)
-- Réseau séparé du réseau local principal
+## 🏗️ Architecture
+- Environnement virtualisé basé sur **VirtualBox**
+- Système hôte : **Kali Linux**
+- Pare-feu dédié : **pfSense**
+- Séparation réseau :
+  - **WAN** : connecté à la box Internet
+  - **LAN** : réseau interne isolé
 
-📌 Un schéma de l’architecture est disponible dans le dossier `diagrammes/`.
-
----
-
-## 🌐 Réseau & sécurité
-
-### Pare-feu
-- pfSense utilisé comme pare-feu principal
-- Règles de filtrage configurées pour contrôler les flux entrants et sortants
-- Accès restreint entre les machines selon leur rôle
-
-### NAT
-- NAT fonctionnel mais **limité** en raison de contraintes matérielles
-- Une seule carte réseau physique disponible sur la machine hôte
-
-👉 Cette contrainte a été prise en compte volontairement afin de travailler malgré un environnement non idéal, comme cela peut arriver en entreprise.
+📌 Un schéma de la topologie réseau est disponible dans le dossier `diagrammes/`.
 
 ---
 
-## 🔌 VLAN
-Les VLAN ne sont **pas implémentés dans ce homelab** pour les raisons suivantes :
-- Limitation matérielle (une seule interface réseau)
-- Les concepts VLAN ont déjà été pratiqués en ligne de commande dans un autre contexte
+## ⚙️ Déroulement du projet
 
-📌 En environnement réel, des VLAN auraient été utilisés pour séparer :
-- Utilisateurs
-- Serveurs
-- Administration
-- DMZ
+### Environnement de virtualisation
+- Choix de **VirtualBox** comme hyperviseur
+- Objectif : conserver un poste de travail léger et polyvalent tout en permettant des tests réseau avancés
 
----
+### Configuration réseau
+- pfSense configuré avec deux interfaces réseau :
+  - WAN : accès Internet
+  - LAN : réseau interne isolé
+- Mise en place des règles de base pour permettre la communication contrôlée entre LAN et WAN
 
-## 🖥️ Systèmes déployés
-- **Linux (Debian)** :
-  - Services systèmes
-  - Tests d’intégration réseau
-- **Windows Server 2022** :
-  - Environnement serveur
-  - Tests de rôles et services Windows
+### Extension du lab
+- Intégration de plusieurs machines virtuelles dans le LAN :
+  - **Debian**
+  - **Windows Server**
+- Simulation d’un réseau interne d’entreprise derrière un pare-feu
 
 ---
 
-## ⚙️ Mise en œuvre
-### Prérequis
-- Hyperviseur (environnement virtualisé)
-- pfSense
-- Images ISO Linux et Windows Server
-- Accès réseau contrôlé
+## ⚠️ Problème rencontré
+Par défaut, VirtualBox ne proposait pas automatiquement plusieurs adaptateurs réseau sur Kali Linux.
 
-Les étapes de configuration détaillées sont disponibles dans la documentation associée.
+### Analyse
+- Nécessité de comprendre et manipuler les différents modes réseau de VirtualBox :
+  - NAT
+  - Bridged
+  - Internal network
+
+### Solution
+- Configuration manuelle des interfaces réseau via la commande :
+  - `VBoxManage`
+- Vérification du bon fonctionnement des interfaces côté pfSense
+
+Cette étape a permis de mieux comprendre l’impact des modes réseau sur l’architecture globale.
 
 ---
 
 ## ✅ Résultats obtenus
-- Infrastructure fonctionnelle et isolée du réseau local
-- Pare-feu pfSense opérationnel
-- Communication contrôlée entre les machines virtuelles
-- Compréhension concrète des flux réseau et des règles de filtrage
+- Réseau virtuel isolé derrière pfSense
+- Accès Internet fonctionnel depuis le LAN
+- Infrastructure stable et réutilisable
+- Possibilité d’expérimenter différents scénarios :
+  - règles de firewall
+  - segmentation réseau
+  - hébergement de services internes
 
 ---
 
-## ⚠️ Problèmes rencontrés
-- Limitations liées à la présence d’une seule carte réseau
-- Contraintes sur le NAT et la segmentation
-- Ajustement des règles firewall pour éviter les blocages involontaires
-
-Ces difficultés ont permis de mieux comprendre :
-- l’impact du matériel sur l’architecture réseau
-- l’importance de la segmentation
-- le rôle central du pare-feu dans une infrastructure
+## 🧠 Compétences mises en œuvre
+- Déploiement et configuration d’un pare-feu pfSense
+- Gestion de la segmentation réseau LAN / WAN
+- Compréhension et configuration des modes réseau VirtualBox
+- Conception d’une infrastructure réseau virtualisée
+- Mise en place d’un environnement de test proche d’un réseau d’entreprise
 
 ---
 
-## 🚀 Améliorations possibles (vision entreprise)
-- Mise en place de VLAN avec matériel adapté
-- Ajout d’une DMZ
+## 🚀 Évolutions possibles (vision entreprise)
+- Mise en place de VLAN
+- Intégration d’un Active Directory
+- Déploiement d’IDS / IPS
 - Supervision réseau
 - Centralisation des logs
-- Sauvegarde et restauration de la configuration pfSense
-
