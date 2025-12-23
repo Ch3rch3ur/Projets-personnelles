@@ -13,13 +13,14 @@ Ce projet a été réalisé dans un cadre d’autoformation après l’obtention
 ## 🏗️ Architecture générale
 - Infrastructure virtualisée
 - Système hôte : **Kali Linux**
+- Hyperviseur : **VirtualBox**
 - Pare-feu dédié : **pfSense**
 - Séparation réseau :
   - **WAN** : connecté à la box Internet
   - **LAN** : réseau interne isolé
 - Machines virtuelles :
-  - Linux (Debian)
-  - Windows Server 2022 (version d’évaluation 180 jours)
+  - **Debian**
+  - **Windows Server 2022** (version d’évaluation 180 jours)
 - Réseau séparé du réseau local principal
 
 📌 Un schéma de l’architecture est disponible dans le dossier `diagrammes/`.
@@ -44,34 +45,13 @@ Ce projet a été réalisé dans un cadre d’autoformation après l’obtention
 ## 🔌 VLAN
 Les VLAN ne sont **pas implémentés dans ce homelab** pour les raisons suivantes :
 - Limitation matérielle (une seule interface réseau)
-- Les concepts VLAN ont déjà été pratiqués en ligne de commande dans un autre contexte
+- Les concepts VLAN ont déjà été pratiqués dans un autre contexte
 
 📌 En environnement réel, des VLAN auraient été utilisés pour séparer :
 - Utilisateurs
 - Serveurs
 - Administration
 - DMZ
-
----
-
-## 🖥️ Systèmes déployés
-- **Linux (Debian)** :
-  - Services systèmes
-  - Tests d’intégration réseau
-- **Windows Server 2022** :
-  - Environnement serveur
-  - Tests de rôles et services Windows
-
----
-
-## ⚙️ Mise en œuvre
-### Prérequis
-- Hyperviseur (environnement virtualisé)
-- pfSense
-- Images ISO Linux et Windows Server
-- Accès réseau contrôlé
-
-Les étapes de configuration détaillées sont disponibles dans la documentation associée.
 
 ---
 
@@ -90,8 +70,39 @@ Les étapes de configuration détaillées sont disponibles dans la documentation
 ### Extension du lab
 - Intégration de plusieurs machines virtuelles dans le LAN :
   - **Debian**
-  - **Windows Server**
+  - **Windows Server 2022**
 - Simulation d’un réseau interne d’entreprise derrière un pare-feu
+
+---
+
+## ⚠️ Problèmes rencontrés
+
+### Contraintes matérielles
+- Présence d’une seule carte réseau physique
+- Limitations sur le NAT et la segmentation
+
+Ces contraintes ont permis de mieux comprendre :
+- l’impact du matériel sur l’architecture réseau
+- l’importance de la segmentation
+- le rôle central du pare-feu dans une infrastructure
+
+---
+
+### Configuration des interfaces VirtualBox
+Par défaut, VirtualBox ne proposait pas automatiquement plusieurs adaptateurs réseau sur Kali Linux.
+
+#### Analyse
+- Nécessité de comprendre et manipuler les différents modes réseau :
+  - NAT
+  - Bridged
+  - Internal Network
+
+#### Solution
+- Configuration manuelle des interfaces réseau via la commande :
+  - `VBoxManage`
+- Vérification du bon fonctionnement des interfaces côté pfSense
+
+Cette étape a permis de mieux comprendre l’impact des modes réseau sur l’architecture globale.
 
 ---
 
@@ -103,15 +114,12 @@ Les étapes de configuration détaillées sont disponibles dans la documentation
 
 ---
 
-## ⚠️ Problèmes rencontrés
-- Limitations liées à la présence d’une seule carte réseau
-- Contraintes sur le NAT et la segmentation
-- Ajustement des règles firewall pour éviter les blocages involontaires
-
-Ces difficultés ont permis de mieux comprendre :
-- l’impact du matériel sur l’architecture réseau
-- l’importance de la segmentation
-- le rôle central du pare-feu dans une infrastructure
+## 🧠 Compétences mises en œuvre
+- Déploiement et configuration d’un pare-feu pfSense
+- Gestion de la segmentation réseau LAN / WAN
+- Compréhension et configuration des modes réseau VirtualBox
+- Conception d’une infrastructure réseau virtualisée
+- Mise en place d’un environnement de test proche d’un réseau d’entreprise
 
 ---
 
@@ -121,4 +129,3 @@ Ces difficultés ont permis de mieux comprendre :
 - Supervision réseau
 - Centralisation des logs
 - Sauvegarde et restauration de la configuration pfSense
-
