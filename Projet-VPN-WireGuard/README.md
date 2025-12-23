@@ -1,87 +1,83 @@
-# Serveur VPN WireGuard – Raspberry Pi
+# Déploiement d’un VPN WireGuard personnel
 
 ## 🎯 Objectif du projet
-Mettre en place un serveur VPN sécurisé basé sur **WireGuard**, permettant un accès distant chiffré à une infrastructure personnelle tout en garantissant la confidentialité et l’intégrité des communications.
+Déployer un serveur VPN personnel basé sur **WireGuard** afin de :
+- sécuriser les connexions réseau lors de l’utilisation de Wi-Fi publics,
+- permettre l’accès distant à des ressources locales (NAS, services internes).
 
 ---
 
 ## 🧠 Contexte
 Ce projet a été réalisé dans un cadre d’autoformation après l’obtention de mon **BTS CIEL option IR**.  
-L’objectif était de comprendre le fonctionnement d’un VPN moderne utilisé en entreprise, ainsi que les problématiques liées à l’accès distant sécurisé.
+Il vise à mettre en œuvre une solution VPN moderne, légère et sécurisée, utilisée dans des contextes professionnels pour l’accès distant.
 
 ---
 
 ## 🏗️ Architecture
-- 1 serveur VPN **WireGuard**
-- Déployé sur **Raspberry Pi 5**
-- Clients VPN : postes distants (PC)
-- Accès sécurisé à certains services internes
+- Serveur VPN **WireGuard**
+- Hébergement sur **Raspberry Pi 5**
+- Clients VPN :
+  - PC portable
+  - Smartphone
+- Accès distant au réseau local et à Internet
 
-📌 Le serveur VPN est isolé du réseau local afin de limiter les risques de sécurité.
-
----
-
-## 🔐 Principe de fonctionnement
-- WireGuard utilise un chiffrement moderne basé sur des clés publiques / privées
-- Chaque client possède une paire de clés unique
-- Seuls les pairs autorisés peuvent établir une connexion avec le serveur
-
-👉 Aucune authentification par mot de passe :  
-la sécurité repose sur la cryptographie asymétrique.
+📌 Un schéma de la topologie réseau est disponible dans le dossier `diagrammes/`.
 
 ---
 
-## ⚙️ Mise en œuvre
+## ⚙️ Réalisation
 
-### Prérequis
-- Raspberry Pi avec Linux
-- Accès réseau
-- WireGuard installé
-- Redirection de ports configurée sur la box/routeur
+### Mise en place du serveur
+- Installation de WireGuard via **PiVPN**
+- Configuration du routage réseau et du **NAT**
+- Activation du forwarding IP
 
-### Étapes principales
-- Génération des clés serveur et client
-- Configuration de l’interface WireGuard
-- Définition des pairs autorisés
-- Activation du routage et du pare-feu
-- Test de connexion depuis un client distant
+### Configuration des clients
+- Création de plusieurs profils clients
+- Importation de la configuration via **QR code**
+- Connexion depuis différents équipements (PC, mobile)
 
-Les fichiers de configuration sont documentés dans le dossier `docs/`.
+### Sécurisation de la machine
+- Mise en place d’un pare-feu **UFW**
+- Politique restrictive : seuls les flux nécessaires sont autorisés
 
 ---
 
-## 🔒 Sécurité
-- Accès limité aux pairs connus
-- Clés privées stockées uniquement sur les machines concernées
-- Aucun service exposé inutilement
-- Chiffrement natif des communications
+## ⚠️ Problème rencontré
+Après l’activation du pare-feu UFW, le trafic VPN ne transitait plus correctement.
+
+### Analyse
+- Le firewall bloquait :
+  - le forwarding IP,
+  - les flux nécessaires au fonctionnement de WireGuard.
+
+### Solution
+- Autorisation du port **UDP 51820**
+- Ajout d’une règle de routage avec :
+  - `ufw route allow`
+- Vérification du forwarding réseau
 
 ---
 
 ## ✅ Résultats obtenus
-- Connexion VPN stable et fonctionnelle
-- Accès distant sécurisé aux ressources autorisées
-- Chiffrement complet du trafic
-- Performances adaptées à l’usage personnel et aux tests
+- VPN pleinement fonctionnel et utilisable en mobilité
+- Connexion sécurisée et chiffrée
+- Accès distant aux ressources locales
+- Machine protégée par un pare-feu configuré de manière restrictive
 
 ---
 
-## ⚠️ Problèmes rencontrés
-- Configuration du routage réseau
-- Gestion des règles firewall
-- Tests de connectivité selon les clients
-
-Ces difficultés ont permis de mieux comprendre :
-- le fonctionnement du tunneling
-- la gestion des flux réseau
-- l’importance du firewall dans un contexte VPN
+## 🧠 Compétences démontrées
+- Déploiement et configuration d’un VPN sécurisé avec WireGuard
+- Gestion du **NAT** et du **forwarding IP**
+- Configuration et dépannage d’un pare-feu
+- Analyse et résolution de problèmes réseau
+- Mise en place d’une solution utilisée en conditions réelles
 
 ---
 
 ## 🚀 Améliorations possibles (vision entreprise)
+- Journalisation et supervision du service VPN
 - Gestion centralisée des clients
-- Journalisation avancée
-- Supervision du service VPN
 - Automatisation du déploiement
-- Haute disponibilité
-
+- Intégration dans une infrastructure multi-sites
