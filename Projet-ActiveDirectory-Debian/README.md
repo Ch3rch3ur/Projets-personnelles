@@ -66,7 +66,7 @@ Cette séparation permet de distinguer clairement :
 - Connectivité réseau entre les machines
 
 Les scripts et fichiers de configuration sont disponibles dans le dossier `scripts/`.
-[Scripts détaillé](Scripts/)
+[Scripts détaillé](Script/)
 
 ---
 
