@@ -30,7 +30,7 @@ Le serveur Windows agit comme autorité d’authentification.
 Les systèmes Linux délèguent l’authentification et le contrôle d’accès à Active Directory.
 
 📌 Schéma réseau : dossier `diagrammes/` 
-🔗 [Diagrammes détaillé](Diagrammes/Topologie-Réseau-Active-Directory-Linux.png) pour plus d’informations
+[Diagrammes détaillé](Diagrammes/Topologie-Réseau-Active-Directory-Linux.png) 
 
 ---
 
