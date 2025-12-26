@@ -1,72 +1,117 @@
-# Active Directory Linux – Debian / PAM / SSSD / Kerberos
+# Intégration Linux ↔ Active Directory  
+Authentification centralisée Debian via Kerberos, SSSD et PAM
 
-## 🎯 Objectif
-Mettre en place une infrastructure d’authentification centralisée permettant à des machines Linux Debian de s’authentifier sur un domaine Active Directory, avec une gestion fine des droits utilisateurs et administrateurs.
+## Objectif du projet
+Mettre en place une authentification centralisée Active Directory pour des systèmes Linux Debian, avec :
+- un contrôle strict des accès SSH,
+- une gestion centralisée des droits administrateurs (sudo),
+- aucune dépendance à des solutions propriétaires tierces.
 
----
-
-## 🧠 Contexte
-Ce projet a été réalisé dans un cadre d’autoformation après l’obtention de mon **BTS CIEL option IR**.  
-L’objectif était de comprendre le fonctionnement réel de l’authentification en environnement professionnel, notamment dans des infrastructures mixtes Windows / Linux.
-
----
-
-## 🏗️ Architecture
-- 1 contrôleur de domaine Active Directory
-- 1 machine cliente Debian
-- Authentification basée sur Kerberos
-- Gestion des identités via SSSD
-- PAM utilisé pour l’authentification système
-
-📌 Schéma réseau disponible dans le dossier `diagrammes/`.
+Le projet vise à reproduire un cas réel d’infrastructure d’entreprise et à comprendre les mécanismes sous-jacents (DNS, Kerberos, SSSD, PAM), au-delà d’un simple fonctionnement « clé en main ».
 
 ---
 
-## 🔐 Principe de fonctionnement
-- **PAM** gère les mécanismes d’authentification côté système Linux
-- **SSSD** interroge l’Active Directory pour récupérer les identités et les droits
-- **Kerberos** fournit un ticket d’authentification permettant l’accès aux ressources sans saisie répétée du mot de passe
-
-Les utilisateurs standards n’ont **aucun accès sudo**, contrairement aux comptes administrateurs.
+## Contexte
+Projet réalisé de manière autonome dans un laboratoire personnel après l’obtention d’un **BTS CIEL option IR**.  
+Il s’inscrit dans une démarche de montée en compétences en administration systèmes et en intégration d’environnements Windows / Linux en contexte professionnel.
 
 ---
 
-## ⚙️ Mise en œuvre
-### Prérequis
-- Debian 11 ou 12
-- Accès réseau au contrôleur de domaine
+## Architecture
+- Windows Server 2022  
+  - Active Directory Domain Services  
+  - DNS  
+  - Kerberos (KDC)
+- Debian GNU/Linux (client du domaine)
+- pfSense (routage)
+- Domaine : `homelab.local`
+
+Le serveur Windows agit comme autorité d’authentification.  
+Les systèmes Linux délèguent l’authentification et le contrôle d’accès à Active Directory.
+
+📌 Schéma réseau : dossier `diagrammes/`
+
+---
+
+## Principe de fonctionnement
+- Authentification des utilisateurs Linux via **Kerberos**
+- Résolution des identités et groupes Active Directory via **SSSD**
+- Contrôle des accès assuré par **PAM**
+- Filtrage explicite des accès par groupes AD
+
+Groupes utilisés :
+- `linux-users` : accès SSH
+- `linux-admins` : accès SSH + sudo
+- Aucun accès implicite pour `Domain Users`
+
+Cette séparation permet de distinguer clairement :
+- authentification,
+- autorisation,
+- gestion des privilèges.
+
+---
+
+## Mise en œuvre technique
+### Composants principaux
+- `realmd`
+- `sssd`
+- `krb5`
+- `pam`
+- `nss`
+
+### Pré-requis essentiels
+- Résolution DNS fonctionnelle (enregistrements AD complets)
 - Synchronisation horaire (NTP)
-- Résolution DNS fonctionnelle
+- Connectivité réseau entre les machines
 
-### Paquets utilisés
-- sssd
-- krb5-user
-- libpam-sss
-
-Les fichiers de configuration et scripts sont disponibles dans le dossier `scripts/`.
+Les scripts et fichiers de configuration sont disponibles dans le dossier `scripts/`.
 
 ---
 
-## ✅ Résultats
-- Authentification réussie des utilisateurs du domaine sur Debian
-- Séparation effective des rôles utilisateurs / administrateurs
-- Accès sudo limité aux groupes administrateurs
+## Problèmes rencontrés et résolution
+- **DNS**
+  - Résolution FQDN incomplète, enregistrements SRV manquants
+  - Correction des enregistrements A / PTR / SRV côté Active Directory
+
+- **Kerberos**
+  - Échecs de `kinit` malgré des identifiants valides
+  - Causes : incohérences DNS / realm, comptes AD désactivés, configuration `krb5.conf`
+
+- **SSSD / PAM**
+  - Authentification réussie mais accès SSH refusé
+  - Filtrage par groupes mal appliqué et cache SSSD non purgé
+
+- **Répertoires utilisateurs**
+  - Absence de home directories
+  - Activation de la création automatique via PAM
+
+Ces incidents ont permis de distinguer clairement les rôles de chaque composant dans la chaîne d’authentification.
 
 ---
 
-## ⚠️ Problèmes rencontrés
-- Erreurs Kerberos liées à la synchronisation horaire
-- Mauvaise résolution DNS initiale
-- Droits incorrects sur certains groupes
+## Résultats
+- Intégration fonctionnelle entre Active Directory et Linux
+- Accès SSH contrôlé par groupes AD
+- Droits sudo gérés via Active Directory
+- Création automatique des répertoires utilisateurs
+- Infrastructure stable et reproductible
 
-Ces problèmes ont permis de mieux comprendre les dépendances entre Kerberos, DNS et NTP.
+Les tests ont été réalisés avec des comptes autorisés et non autorisés afin de valider les contrôles d’accès.
 
 ---
 
-## 🚀 Améliorations possibles
-- Automatisation de l’intégration avec Ansible
-- Centralisation des logs
+## Améliorations possibles
+- Automatisation de l’intégration via Ansible
+- Centralisation et exploitation des logs
 - Supervision des services d’authentification
-- Déploiement sur plusieurs machines clientes
+- Déploiement sur plusieurs clients Linux
 
+---
 
+## Compétences démontrées
+- Administration Active Directory
+- DNS (A, PTR, SRV)
+- Kerberos
+- Intégration Linux / AD (SSSD, PAM, NSS)
+- Gestion des accès et des privilèges
+- Diagnostic et résolution d’incidents systèmes
