@@ -29,7 +29,7 @@ Il s’inscrit dans une démarche de montée en compétences en administration s
 Le serveur Windows agit comme autorité d’authentification.  
 Les systèmes Linux délèguent l’authentification et le contrôle d’accès à Active Directory.
 
-📌 Schéma réseau : dossier `diagrammes/`
+📌 Schéma réseau : dossier `diagrammes/` [diagrammes] (diagrammes/)
 
 ---
 
