@@ -33,7 +33,7 @@ Authentification centralisée pour systèmes Linux via Kerberos/SSSD. Accès SSH
 
 **Technologies** : Kerberos • SSSD • PAM • Windows Server 2022 • Debian 12
 
-📁 [Voir le projet complet →](Projet-ActiveDirectory-Debian/README.md)
+📁 [Voir le projet complet →](./Projet-ActiveDirectory-Debian)
 
 ---
 
@@ -43,7 +43,7 @@ Infrastructure multi-OS virtualisée avec pare-feu pfSense pour gérer le LAN/WA
 
 **Technologies** : pfSense • VirtualBox • NAT • Firewall
 
-📁 [Voir le projet complet →](Projet-Homelab-pfSense/README.md)
+📁 [Voir le projet complet →](./Projet-Homelab-pfSense)
 
 ---
 
