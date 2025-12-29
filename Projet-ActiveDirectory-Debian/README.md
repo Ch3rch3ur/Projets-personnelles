@@ -40,9 +40,9 @@ Mettre en place une **authentification centralisée Active Directory** pour des 
 
 ### 📸 Topologie réseau
 
-![Schéma réseau](diagrammes/topologie.png)
+![Schéma réseau](Diagrammes/topologie.png)
 
-📁 [Voir les schémas détaillés →](diagrammes/)
+📁 [Voir les schémas détaillés →](Diagrammes/)
 
 ---
 
