@@ -89,7 +89,7 @@ Au cours du projet, plusieurs incidents ont permis de distinguer clairement les 
 * **Problème** : Home directories absents après première connexion
 * **Solution** : Activation de la création automatique via PAM
 
-👉 **Détails et commandes de résolution** : [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+👉 **Détails et commandes de résolution** : [TROUBLESHOOTING.md](troubleshooting.md)
 
 ---
 
