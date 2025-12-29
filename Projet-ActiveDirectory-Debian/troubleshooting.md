@@ -663,7 +663,7 @@ nc -zv dc.homelab.local 53   # DNS
 
 * Documentation Red Hat : [Integration with Active Directory](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/integrating_rhel_systems_directly_with_windows_active_directory/index)
 * Wiki Debian : [SSSD and Active Directory](https://wiki.debian.org/AuthenticatingLinuxWithActiveDirectory)
-* Documentation Microsoft : [Troubleshooting Kerberos](https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/kerberos-authentication-problems)
+* Documentation Microsoft : [Troubleshooting Kerberos](https://learn.microsoft.com/en-us/troubleshoot/windows-server/welcome-windows-server)
 
 ---
 
