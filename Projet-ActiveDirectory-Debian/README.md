@@ -104,9 +104,9 @@ Au cours du projet, plusieurs incidents ont permis de distinguer clairement les 
 
 ## 📚 Documentation
 
-* 📄 [Compte-rendu complet (PDF)](docs/Projet_Active_Directory_Linux_Compte_rendu.pdf) - Analyse détaillée avec flux réseau OSI
-* 💻 [Scripts d'installation](scripts/) - Scripts Bash avec notes d'installation
-* 🗺️ [Schémas réseau](diagrammes/) - Topologie de l'infrastructure
+* 📄 [Compte-rendu complet (PDF)](Documents/Projet_Active_Directory_Linux_Compte_rendu.pdf) - Analyse détaillée avec flux réseau OSI
+* 💻 [Scripts d'installation](Script/) - Scripts Bash avec notes d'installation
+* 🗺️ [Schémas réseau](Diagrammes/) - Topologie de l'infrastructure
 * 🐛 [Guide de dépannage](TROUBLESHOOTING.md) - Problèmes rencontrés et solutions détaillées
 
 ---
