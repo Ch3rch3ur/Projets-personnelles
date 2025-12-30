@@ -1,6 +1,6 @@
 # 🐛 Troubleshooting - Projet Active Directory Linux
 
-> **⏱️ Temps total de debug** : ~4-5 heures réparties sur 3 jours  
+> **⏱️ Temps total de debug** : ~6 heures réparties sur 3 jours  
 > **💡 Problèmes majeurs** : 3 (DNS, SSSD cache, PAM)  
 > **🎓 Apprentissages clés** : Méthodologie de diagnostic, distinction auth/autorisation, importance des logs
 
