@@ -1,5 +1,24 @@
 # 🐛 Troubleshooting - Projet Active Directory Linux
 
+> **⏱️ Temps total de debug** : ~4-5 heures réparties sur 3 jours  
+> **💡 Problèmes majeurs** : 3 (DNS, SSSD cache, PAM)  
+> **🎓 Apprentissages clés** : Méthodologie de diagnostic, distinction auth/autorisation, importance des logs
+
+## 📌 TL;DRSythèse du document
+
+**Problèmes rencontrés** :
+1. **DNS** : Mauvais nom de serveur (`srv-vm` au lieu de `srv-win`) → Diagnostiqué via `dig`
+2. **SSSD** : Cache obsolète bloquant les changements de config → Résolu avec `sss_cache -E`
+3. **PAM** : Filtrage groupes AD mal configuré → Logs `/var/log/auth.log` ont révélé le problème
+
+**Compétences démontrées** : Diagnostic méthodique (DNS → Kerberos → SSSD → PAM), lecture de logs système, résolution autonome d'incidents complexes
+
+**Temps de résolution moyen** : 1-2h par incident
+
+👉 **Détails techniques complets ci-dessous**
+
+---
+
 Ce document détaille les **problèmes réels rencontrés** lors de l'intégration de systèmes Linux à Active Directory, ainsi que les **méthodes de diagnostic appliquées** et les **solutions mises en œuvre**.
 
 > **Note** : Tous les incidents décrits ici ont été réellement rencontrés et résolus lors du projet. Les commandes et solutions sont celles qui ont effectivement fonctionné.
