@@ -4,7 +4,7 @@
 > **💡 Problèmes majeurs** : 3 (DNS, SSSD cache, PAM)  
 > **🎓 Apprentissages clés** : Méthodologie de diagnostic, distinction auth/autorisation, importance des logs
 
-## 📌 TL;DRSythèse du document
+## 📌 Sythèse du document
 
 **Problèmes rencontrés** :
 1. **DNS** : Mauvais nom de serveur (`srv-vm` au lieu de `srv-win`) → Diagnostiqué via `dig`
