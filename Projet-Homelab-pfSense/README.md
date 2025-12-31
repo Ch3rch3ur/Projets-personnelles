@@ -87,7 +87,7 @@ Concevoir et déployer un **homelab réseau virtualisé** reproduisant une infra
 * Manipulation de la ligne de commande VirtualBox
 * Impact des modes réseau sur l'architecture globale
 
-👉 **Détails techniques** : [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+👉 **Détails techniques** : [TROUBLESHOOTING.md](troubleshooting.md)
 
 ---
 
@@ -102,9 +102,9 @@ Concevoir et déployer un **homelab réseau virtualisé** reproduisant une infra
 
 ## 📚 Documentation
 
-* 📄 [Compte-rendu complet (PDF)](docs/Projet_Homelab_Compte_rendu.pdf) - Documentation détaillée du projet
-* 🗺️ [Schémas réseau](diagrammes/) - Topologie de l'infrastructure
-* 🐛 [Guide de dépannage](TROUBLESHOOTING.md) - Configuration VirtualBox et résolution de problèmes
+* 📄 [Compte-rendu complet (PDF)](Documents/Projet_Homelab_Compte_rendu.pdf) - Documentation détaillée du projet
+* 🗺️ [Schémas réseau](Diagrammes/) - Topologie de l'infrastructure
+* 🐛 [Guide de dépannage](troubleshooting.md) - Configuration VirtualBox et résolution de problèmes
 
 ---
 
