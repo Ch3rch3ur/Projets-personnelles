@@ -1,0 +1,17 @@
+un script Bash qui automatise l’installation et la configuration d’un serveur WireGuard via PiVPN, ainsi que l’activation de l’IP forwarding et du NAT. 
+
+Cependant, quelques points importants :
+
+PiVPN installe et configure déjà la plupart des éléments (WireGuard, clés, interface wg0) automatiquement.
+
+Pour le NAT et l’IP forwarding, le script peut ajouter les lignes dans /etc/sysctl.conf et configurer iptables pour rendre le routage permanent.
+
+La création automatique de clients peut aussi être intégrée, mais le script demandera des noms de clients ou utilisera des variables par défaut.
+
+
+⚠ Points importants :
+
+L’installateur PiVPN reste interactif pour certaines étapes (choix de l’utilisateur, IP statique, protocole, interface réseau, DNS).
+
+Ce script ne supprime pas les interactions obligatoires du script officiel PiVPN, mais automatise le routage NAT et l’IP forwarding, et propose d’ajouter un client.
+
