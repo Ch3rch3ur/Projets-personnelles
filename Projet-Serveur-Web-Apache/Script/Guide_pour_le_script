@@ -1,0 +1,35 @@
+un script Bash automatisé qui couvre la majorité des étapes (installation, configuration Apache, HTTPS, sécurité de base).
+
+⚠️ Par contre :
+
+Certaines étapes resteront interactives (ex. : création du certificat Let’s Encrypt → Certbot doit valider ton domaine).
+
+La configuration No-IP dans la box ne peut pas être automatisée (il faut le faire via l’interface web de la box).
+
+Le CSP doit parfois être adapté manuellement en fonction des ressources utilisées par ton site.
+
+Utilisation :
+
+Rendre executable : chmod +x setup_apache_secure.sh
+
+Le lance : ./setup_apache_secure.sh
+
+
+
+Ce que fait ce script :
+
+    Met à jour ton système.
+
+    Installe Apache + PHP + Certbot.
+
+    Active les modules nécessaires (SSL, headers, rewrite, expires).
+
+    Crée un VirtualHost complet pour ton domaine.
+
+    Configure les en-têtes de sécurité.
+
+    Configure la gestion du cache.
+
+    Active ton site et désactive le défaut.
+
+    Lance certbot pour générer un certificat SSL Let’s Encrypt
