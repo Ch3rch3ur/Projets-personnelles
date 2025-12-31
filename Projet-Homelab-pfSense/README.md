@@ -124,14 +124,11 @@ Concevoir et déployer un **homelab réseau virtualisé** reproduisant une infra
 **Avec matériel adapté (plusieurs cartes réseau physiques)** :
 * Mise en place de VLAN pour segmentation avancée (Utilisateurs, Serveurs, Admin, DMZ)
 * Implémentation d'une DMZ pour services publics
-* Ajout d'un IDS/IPS (Snort/Suricata) sur pfSense
 
 **Supervision et monitoring** :
-* Centralisation des logs (ELK Stack ou Graylog)
-* Monitoring réseau (Zabbix ou Nagios)
-* Graphiques de trafic (pfSense built-in + RRDTool)
+* Centralisation des logs
+* Monitoring réseau
+* Graphiques de trafic
 
 **Haute disponibilité** :
-* Configuration CARP (failover pfSense)
 * Sauvegarde automatisée des configurations
-* Plan de reprise d'activité (PRA)
