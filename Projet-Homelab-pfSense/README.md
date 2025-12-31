@@ -40,9 +40,9 @@ Concevoir et déployer un **homelab réseau virtualisé** reproduisant une infra
 
 ### 📸 Topologie réseau
 
-![Schéma réseau](diagrammes/topologie.png)
+![Schéma réseau](Diagrammes/Topologie-Réseau-HomeLab-pfSense.png)
 
-📁 [Voir les schémas détaillés →](diagrammes/)
+📁 [Voir les schémas détaillés →](Diagrammes/)
 
 ---
 
