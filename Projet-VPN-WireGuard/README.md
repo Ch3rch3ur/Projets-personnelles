@@ -1,83 +1,136 @@
-# Déploiement d’un VPN WireGuard personnel
+# 🔒 VPN WireGuard personnel sur Raspberry Pi
 
-## 🎯 Objectif du projet
-Déployer un serveur VPN personnel basé sur **WireGuard** afin de :
-- sécuriser les connexions réseau lors de l’utilisation de Wi-Fi publics,
-- permettre l’accès distant à des ressources locales (NAS, services internes).
+Serveur VPN sécurisé pour accès distant au réseau local et protection sur Wi-Fi publics.
 
 ---
 
-## 🧠 Contexte
-Ce projet a été réalisé dans un cadre d’autoformation après l’obtention de mon **BTS CIEL option IR**.  
-Il vise à mettre en œuvre une solution VPN moderne, légère et sécurisée, utilisée dans des contextes professionnels pour l’accès distant.
+## 📋 Contexte
+
+Projet autonome réalisé après l'obtention d'un BTS CIEL option IR. L'objectif est de déployer une solution VPN moderne et performante pour sécuriser les connexions distantes et accéder aux ressources locales en mobilité.
+
+---
+
+## 🎯 Objectif du projet
+
+Construire un **VPN personnel** pour se connecter à des Wi-Fi publics tout en gardant le contrôle sur ses données :
+
+* Sécuriser les connexions réseau sur Wi-Fi publics non fiables
+* Chiffrer l'ensemble du trafic pour protéger les données personnelles
+* Éviter l'interception et l'espionnage sur réseaux publics
+* Accéder de manière sécurisée à Internet depuis n'importe où
+* Permettre l'accès distant aux ressources locales (bonus)
+
+**But pédagogique** : Maîtriser les concepts de VPN, NAT, forwarding IP et configuration de pare-feu.
 
 ---
 
 ## 🏗️ Architecture
-- Serveur VPN **WireGuard**
-- Hébergement sur **Raspberry Pi 5**
-- Clients VPN :
-  - PC portable
-  - Smartphone
-- Accès distant au réseau local et à Internet
 
-📌 Un schéma de la topologie réseau est disponible dans le dossier `diagrammes/`.
+**Infrastructure matérielle :**
 
----
+* **Serveur VPN** : Raspberry Pi 5
+* **Solution VPN** : WireGuard (via PiVPN)
+* **Pare-feu** : UFW (Uncomplicated Firewall)
+* **Clients VPN** :
+  * PC portable (Linux/Windows)
+  * Smartphone (Android/iOS)
 
-## ⚙️ Réalisation
+**Principe** : Le Raspberry Pi agit comme passerelle VPN chiffrée entre les clients distants et le réseau local/Internet.
 
-### Mise en place du serveur
-- Installation de WireGuard via **PiVPN**
-- Configuration du routage réseau et du **NAT**
-- Activation du forwarding IP
+### 📸 Topologie réseau
 
-### Configuration des clients
-- Création de plusieurs profils clients
-- Importation de la configuration via **QR code**
-- Connexion depuis différents équipements (PC, mobile)
+![Schéma réseau](diagrammes/topologie.png)
 
-### Sécurisation de la machine
-- Mise en place d’un pare-feu **UFW**
-- Politique restrictive : seuls les flux nécessaires sont autorisés
+📁 [Voir les schémas détaillés →](diagrammes/)
 
 ---
 
-## ⚠️ Problème rencontré
-Après l’activation du pare-feu UFW, le trafic VPN ne transitait plus correctement.
+## ⚙️ Fonctionnalités réalisées
 
-### Analyse
-- Le firewall bloquait :
-  - le forwarding IP,
-  - les flux nécessaires au fonctionnement de WireGuard.
-
-### Solution
-- Autorisation du port **UDP 51820**
-- Ajout d’une règle de routage avec :
-  - `ufw route allow`
-- Vérification du forwarding réseau
+✅ Serveur WireGuard opérationnel sur Raspberry Pi 5  
+✅ Configuration du routage réseau et du NAT  
+✅ Forwarding IP activé pour le transit des paquets  
+✅ Plusieurs clients configurés (PC, smartphone)  
+✅ Import de configuration via QR code  
+✅ Pare-feu UFW avec politique restrictive  
+✅ Connexion sécurisée et chiffrée en conditions réelles
 
 ---
 
-## ✅ Résultats obtenus
-- VPN pleinement fonctionnel et utilisable en mobilité
-- Connexion sécurisée et chiffrée
-- Accès distant aux ressources locales
-- Machine protégée par un pare-feu configuré de manière restrictive
+## 🔧 Technologies utilisées
+
+`WireGuard` `PiVPN` `UFW` `NAT` `IP Forwarding` `Raspberry Pi 5` `QR Code` `Chiffrement`
 
 ---
 
-## 🧠 Compétences démontrées
-- Déploiement et configuration d’un VPN sécurisé avec WireGuard
-- Gestion du **NAT** et du **forwarding IP**
-- Configuration et dépannage d’un pare-feu
-- Analyse et résolution de problèmes réseau
-- Mise en place d’une solution utilisée en conditions réelles
+## 🐛 Principaux défis techniques
+
+### Blocage du trafic VPN après activation du pare-feu
+
+**Problème** : Après activation d'UFW, le trafic VPN ne passait plus
+
+**Analyse** :
+* Le firewall bloquait le forwarding IP entre les interfaces
+* Le port UDP 51820 (WireGuard) n'était pas autorisé
+* Les règles de routage n'étaient pas configurées pour le VPN
+
+**Solution** :
+* Autorisation du port UDP 51820 dans UFW
+* Ajout d'une règle de routage : `ufw route allow`
+* Vérification du forwarding IP dans `/etc/sysctl.conf`
+
+👉 **Détails techniques et commandes** : [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
 
 ---
 
-## 🚀 Améliorations possibles (vision entreprise)
-- Journalisation et supervision du service VPN
-- Gestion centralisée des clients
-- Automatisation du déploiement
-- Intégration dans une infrastructure multi-sites
+## 📊 Résultats
+
+* ✅ VPN pleinement fonctionnel et utilisé en mobilité
+* ✅ Connexion sécurisée et chiffrée depuis Wi-Fi publics
+* ✅ Accès distant aux ressources locales validé
+* ✅ Machine protégée par pare-feu restrictif
+* ✅ Solution testée en conditions réelles (déplacements, Wi-Fi public)
+
+---
+
+## 📚 Documentation
+
+* 📄 [Compte-rendu complet (PDF)](docs/Projet_VPN_Compte_rendu.pdf) - Documentation détaillée du projet
+* 🗺️ [Schémas réseau](diagrammes/) - Topologie de l'infrastructure
+* 🐛 [Guide de dépannage](TROUBLESHOOTING.md) - Configuration UFW et résolution de problèmes
+* 💻 [Scripts de configuration](scripts/) - Scripts d'installation et de configuration
+
+---
+
+## 🎓 Compétences démontrées
+
+* Déploiement et configuration d'un VPN moderne (WireGuard)
+* Gestion du NAT et du forwarding IP
+* Configuration et dépannage de pare-feu (UFW)
+* Analyse et résolution de problèmes réseau
+* Sécurisation des flux réseau (chiffrement, politique restrictive)
+* Mise en place d'une solution utilisée en conditions réelles
+
+---
+
+## 🔄 Améliorations possibles
+
+**Monitoring et supervision** :
+* Journalisation centralisée des connexions VPN
+* Alertes en cas de connexion suspecte
+* Statistiques d'utilisation (bande passante, clients connectés)
+
+**Gestion avancée** :
+* Automatisation du déploiement de nouveaux clients
+* Gestion centralisée des certificats et clés
+* Révocation de clients compromis
+
+**Haute disponibilité** :
+* Configuration failover avec second Raspberry Pi
+* Sauvegarde automatique des configurations
+* Plan de reprise d'activité (PRA)
+
+**Intégration entreprise** :
+* Connexion multi-sites (site-to-site VPN)
+* Intégration avec Active Directory pour l'authentification
+* Politique de sécurité centralisée (firewall distribué)
