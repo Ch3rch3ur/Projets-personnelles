@@ -21,148 +21,37 @@ Le homelab pfSense repose sur une architecture virtualisée où :
 
 Sur Kali Linux, VirtualBox ne propose pas automatiquement la configuration de plusieurs adaptateurs réseau pour une machine virtuelle. L'interface graphique est limitée.
 
-```bash
-# Tentative de créer une VM avec 2 interfaces réseau via l'interface graphique
-# → Seul un adaptateur réseau est visible par défaut
-```
-
 ### Analyse du problème
 
 **Causes identifiées** :
 * VirtualBox sur Kali Linux ne configure pas automatiquement plusieurs adaptateurs
 * L'interface graphique VirtualBox ne permet pas toujours d'ajouter facilement des cartes réseau supplémentaires
-* Nécessité de comprendre les différents modes réseau disponibles :
-  * **NAT** : Permet à la VM d'accéder à Internet via l'hôte
-  * **Bridged** : La VM obtient une IP sur le réseau physique de l'hôte
-  * **Internal Network** : Réseau isolé entre VMs uniquement
-  * **Host-only** : Réseau entre l'hôte et les VMs
+* Nécessité d'utiliser VBoxManage en ligne de commande
 
-### Diagnostic
+### Solution appliquée
 
-#### Étape 1 : Lister les VMs existantes
+J'ai configuré manuellement les interfaces réseau via la commande `VBoxManage` :
 
-```bash
-VBoxManage list vms
-```
+**Pour pfSense** :
+- Interface 1 (WAN) : Mode Bridged vers `wlan0`
+- Interface 2 (LAN) : Mode Internal Network `"LAN"`
 
-**Résultat attendu** :
-```
-"pfSense" {12345678-1234-1234-1234-123456789012}
-"Debian-Client" {87654321-4321-4321-4321-210987654321}
-"Windows-Server" {11111111-2222-3333-4444-555555555555}
-```
+**Pour les machines clientes** :
+- Interface 1 : Mode Internal Network `"LAN"`
 
-#### Étape 2 : Vérifier la configuration réseau actuelle d'une VM
+### Résultat
 
-```bash
-VBoxManage showvminfo "pfSense" | grep NIC
-```
+✅ Toutes les machines configurées correctement  
+✅ Communication fonctionnelle entre LAN et WAN  
+✅ pfSense accessible depuis les clients
 
-**Résultat obtenu** (avant configuration) :
-```
-NIC 1:           MAC: 080027XXXXXX, Attachment: NAT, Cable connected: on, Trace: off
-NIC 2:           disabled
-NIC 3:           disabled
-NIC 4:           disabled
-```
+### Documentation complète
 
-**Problème identifié** : Seule une carte réseau (NIC 1) est configurée en NAT.
+👉 **Pour reproduire l'installation complète** :  
+[Guide VBoxManage détaillé](scripts/vboxmanage-commands.md)
 
----
-
-### Solution : Configuration manuelle avec VBoxManage
-
-#### Pour pfSense (2 interfaces : WAN + LAN)
-
-**Configuration de l'interface WAN (accès Internet)** :
-
-```bash
-# NIC 1 : Mode NAT pour accès Internet (WAN)
-VBoxManage modifyvm "pfSense" --nic1 nat
-VBoxManage modifyvm "pfSense" --cableconnected1 on
-```
-
-**Configuration de l'interface LAN (réseau interne)** :
-
-```bash
-# NIC 2 : Mode Internal Network pour le LAN
-VBoxManage modifyvm "pfSense" --nic2 intnet
-VBoxManage modifyvm "pfSense" --intnet2 "homelab-lan"
-VBoxManage modifyvm "pfSense" --cableconnected2 on
-```
-
-**Explication** :
-* `--nic1 nat` : La première carte utilise NAT pour sortir sur Internet
-* `--nic2 intnet` : La deuxième carte est sur un réseau interne
-* `--intnet2 "homelab-lan"` : Nom du réseau interne (permet de connecter d'autres VMs)
-* `--cableconnected on` : Simule un câble réseau branché
-
----
-
-#### Pour les machines clientes (Debian, Windows Server)
-
-**Configuration d'une seule interface en Internal Network** :
-
-```bash
-# Debian Client
-VBoxManage modifyvm "Debian-Client" --nic1 intnet
-VBoxManage modifyvm "Debian-Client" --intnet1 "homelab-lan"
-VBoxManage modifyvm "Debian-Client" --cableconnected1 on
-
-# Windows Server
-VBoxManage modifyvm "Windows-Server" --nic1 intnet
-VBoxManage modifyvm "Windows-Server" --intnet1 "homelab-lan"
-VBoxManage modifyvm "Windows-Server" --cableconnected1 on
-```
-
-**Résultat** : Toutes les machines clientes sont connectées au même réseau interne `homelab-lan`, avec pfSense comme passerelle.
-
----
-
-### Vérification
-
-#### 1. Vérifier la configuration complète de pfSense
-
-```bash
-VBoxManage showvminfo "pfSense" | grep NIC
-```
-
-**Résultat attendu** :
-```
-NIC 1:           MAC: 080027XXXXXX, Attachment: NAT, Cable connected: on
-NIC 2:           MAC: 080027YYYYYY, Attachment: Internal Network 'homelab-lan', Cable connected: on
-```
-
-#### 2. Démarrer pfSense et vérifier les interfaces
-
-```bash
-# Démarrer la VM
-VBoxManage startvm "pfSense" --type headless
-
-# Se connecter à la console pfSense
-# Option 1 : Assign Interfaces
-```
-
-**Dans pfSense, configuration attendue** :
-* `em0` ou `vtnet0` → WAN (via NAT)
-* `em1` ou `vtnet1` → LAN (192.168.2.1/24)
-
-#### 3. Tester la connectivité depuis une machine cliente
-
-Sur Debian ou Windows Server :
-
-```bash
-# Vérifier l'IP obtenue (devrait être dans 192.168.2.x)
-ip addr show  # Linux
-ipconfig      # Windows
-
-# Tester la passerelle (pfSense)
-ping 192.168.2.1
-
-# Tester l'accès Internet via pfSense
-ping 8.8.8.8
-ping google.com
-```
+👉 **Pour les commandes rapides** :  
+[Scripts d'installation](scripts/README.md)
 
 ---
 
