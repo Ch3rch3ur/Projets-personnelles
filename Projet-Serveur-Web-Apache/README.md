@@ -124,24 +124,19 @@ Déployer un **serveur web auto-hébergé** pour rendre un portfolio personnel a
 
 **Infrastructure** :
 * Déploiement d'un reverse proxy (Nginx devant Apache)
-* Mise en cache (Varnish ou Redis)
-* CDN pour distribution de contenu statique
-* Load balancing pour haute disponibilité
 
 **Sécurité avancée** :
 * Déploiement d'un WAF (ModSecurity)
 * Fail2ban pour protection contre brute-force
-* IDS/IPS (Snort ou Suricata)
-* Monitoring de sécurité (OSSEC, Wazuh)
+* Monitoring de sécurité
 
 **Automatisation** :
 * Conteneurisation (Docker)
-* CI/CD pour déploiement automatique
+* Déploiement automatique
 * Infrastructure as Code (Ansible, Terraform)
 * Sauvegarde automatisée
 
 **Monitoring** :
-* Surveillance avec Prometheus + Grafana
-* Journalisation centralisée (ELK Stack)
+* Surveillance
+* Journalisation centralisée 
 * Alerting en cas d'incident
-* Métriques de performance (temps de réponse, uptime)
