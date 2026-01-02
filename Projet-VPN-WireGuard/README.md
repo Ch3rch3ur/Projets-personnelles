@@ -39,7 +39,7 @@ Construire un **VPN personnel** pour se connecter à des Wi-Fi publics tout en g
 
 ### 📸 Topologie réseau
 
-![Schéma réseau](Diagrammes/topologie.png)
+![Schéma réseau](Diagrammes/Topologie-Réseau-VPN-WireGuard.png)
 
 📁 [Voir les schémas détaillés →](Diagrammes/)
 
@@ -79,7 +79,7 @@ Construire un **VPN personnel** pour se connecter à des Wi-Fi publics tout en g
 * Ajout d'une règle de routage : `ufw route allow`
 * Vérification du forwarding IP dans `/etc/sysctl.conf`
 
-👉 **Détails techniques et commandes** : [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+👉 **Détails techniques et commandes** : [TROUBLESHOOTING.md](troubleshooting.md)
 
 ---
 
@@ -95,10 +95,10 @@ Construire un **VPN personnel** pour se connecter à des Wi-Fi publics tout en g
 
 ## 📚 Documentation
 
-* 📄 [Compte-rendu complet (PDF)](docs/Projet_VPN_Compte_rendu.pdf) - Documentation détaillée du projet
-* 🗺️ [Schémas réseau](diagrammes/) - Topologie de l'infrastructure
-* 🐛 [Guide de dépannage](TROUBLESHOOTING.md) - Configuration UFW et résolution de problèmes
-* 💻 [Scripts de configuration](scripts/) - Scripts d'installation et de configuration
+* 📄 [Compte-rendu complet (PDF)](Documents/Projet_VPN_Compte_rendu.pdf) - Documentation détaillée du projet
+* 🗺️ [Schémas réseau](Diagrammes/) - Topologie de l'infrastructure
+* 🐛 [Guide de dépannage](troubleshooting.md) - Configuration UFW et résolution de problèmes
+* 💻 [Scripts de configuration](Script/) - Scripts d'installation et de configuration
 
 ---
 
