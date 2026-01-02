@@ -39,9 +39,9 @@ Construire un **VPN personnel** pour se connecter à des Wi-Fi publics tout en g
 
 ### 📸 Topologie réseau
 
-![Schéma réseau](diagrammes/topologie.png)
+![Schéma réseau](Diagrammes/topologie.png)
 
-📁 [Voir les schémas détaillés →](diagrammes/)
+📁 [Voir les schémas détaillés →](Diagrammes/)
 
 ---
 
