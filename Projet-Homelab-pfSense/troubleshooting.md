@@ -48,7 +48,7 @@ J'ai configuré manuellement les interfaces réseau via la commande `VBoxManage`
 ### Documentation complète
 
 👉 **Pour reproduire l'installation complète** :  
-[Guide VBoxManage détaillé](Script/vboxmanage-commands.md)
+[Guide VBoxManage détaillé](Script/vboxmanage_commands.md)
 
 👉 **Pour les commandes rapides** :  
 [Scripts d'installation](Script/README.md)
