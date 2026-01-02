@@ -126,11 +126,8 @@ Construire un **VPN personnel** pour se connecter à des Wi-Fi publics tout en g
 * Révocation de clients compromis
 
 **Haute disponibilité** :
-* Configuration failover avec second Raspberry Pi
 * Sauvegarde automatique des configurations
-* Plan de reprise d'activité (PRA)
 
 **Intégration entreprise** :
 * Connexion multi-sites (site-to-site VPN)
 * Intégration avec Active Directory pour l'authentification
-* Politique de sécurité centralisée (firewall distribué)
