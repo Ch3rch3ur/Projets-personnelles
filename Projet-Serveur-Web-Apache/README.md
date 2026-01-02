@@ -43,9 +43,9 @@ Déployer un **serveur web auto-hébergé** pour rendre un portfolio personnel a
 
 ### 📸 Topologie réseau
 
-![Schéma réseau](diagrammes/topologie.png)
+![Schéma réseau](Diagrammes/Topologie-Réseau-Serveur-Web-Apache.png)
 
-📁 [Voir les schémas détaillés →](diagrammes/)
+📁 [Voir les schémas détaillés →](Diagrammes/)
 
 ---
 
@@ -84,7 +84,7 @@ Déployer un **serveur web auto-hébergé** pour rendre un portfolio personnel a
 * Recherche d'un compromis entre sécurité stricte et fonctionnalité du site
 * Tests itératifs pour valider chaque modification
 
-👉 **Détails techniques et configuration CSP** : [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+👉 **Détails techniques et configuration CSP** : [TROUBLESHOOTING.md](troubleshooting.md)
 
 ---
 
@@ -101,10 +101,10 @@ Déployer un **serveur web auto-hébergé** pour rendre un portfolio personnel a
 
 ## 📚 Documentation
 
-* 📄 [Compte-rendu complet (PDF)](docs/Projet_ServeurWeb_Compte_rendu.pdf) - Documentation détaillée du projet
-* 🗺️ [Schémas réseau](diagrammes/) - Topologie de l'infrastructure
-* 🐛 [Guide de dépannage](TROUBLESHOOTING.md) - Configuration CSP et résolution de problèmes
-* 💻 [Configuration Apache](scripts/) - Fichiers de configuration et scripts
+* 📄 [Compte-rendu complet (PDF)](Documents/Projet_ServeurWeb_Compte_rendu.pdf) - Documentation détaillée du projet
+* 🗺️ [Schémas réseau](Diagrammes/) - Topologie de l'infrastructure
+* 🐛 [Guide de dépannage](troubleshooting.md) - Configuration CSP et résolution de problèmes
+* 💻 [Configuration Apache](Script/) - Fichiers de configuration et scripts
 
 ---
 
