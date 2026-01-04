@@ -41,7 +41,7 @@ Mettre en place une **authentification centralisée Active Directory** pour des 
 
 ### 📸 Topologie réseau
 
-![Schéma réseau](Diagrammes/Topologie-Réseau-Active-Directory-Linux.png)
+![Schéma réseau](Diagrammes/)
 
 📁 [Voir les schémas détaillés →](Diagrammes/)
 
