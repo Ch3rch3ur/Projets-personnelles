@@ -108,6 +108,7 @@ Au cours du projet, plusieurs incidents ont permis de distinguer clairement les 
 * 💻 [Scripts d'installation](Script/) - Scripts Bash avec notes d'installation
 * 🗺️ [Schémas réseau](Diagrammes/) - Topologie de l'infrastructure
 * 🐛 [Guide de dépannage](TROUBLESHOOTING.md) - Problèmes rencontrés et solutions détaillées
+* 💻 [Screenshoots](Screenshoots/) - Scripts Bash avec notes d'installation
 
 ---
 
