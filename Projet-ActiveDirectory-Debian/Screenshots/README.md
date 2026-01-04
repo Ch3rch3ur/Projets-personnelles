@@ -8,7 +8,7 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 ### 1. Résolution d'un utilisateur AD par SSSD
 
-![id Administrateur@homelab.local](01_id_administrateur.png)
+![id Administrateur@homelab.local](id_Administrateur.png)
 
 **Commande** : `id Administrateur@homelab.local`
 
@@ -21,7 +21,7 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 ### 2. Enregistrements DNS SRV - Kerberos
 
-![dig SRV _kerberos._tcp.homelab.local](02_dig_srv_kerberos.png)
+![dig SRV _kerberos._tcp.homelab.local](dig_SRV_kerberos.png)
 
 **Commande** : `dig SRV _kerberos._tcp.homelab.local`
 
@@ -34,7 +34,7 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 ### 3. Enregistrements DNS SRV - LDAP
 
-![dig SRV _ldap._tcp.homelab.local](03_dig_srv_ldap.png)
+![dig SRV _ldap._tcp.homelab.local](dig_SRV_ldap.png)
 
 **Commande** : `dig SRV _ldap._tcp.homelab.local`
 
@@ -47,7 +47,7 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 ### 4. Authentification Kerberos
 
-![kinit et klist](04_kinit_klist.png)
+![kinit et klist](klist_retour.png)
 
 **Commandes** :
 ```bash
@@ -64,7 +64,7 @@ klist
 
 ### 5. Configuration du domaine (realm)
 
-![realm list](05_realm_list.png)
+![realm list](realm_list.png)
 
 **Commande** : `realm list`
 
@@ -79,7 +79,7 @@ klist
 
 ### 6. Connexion SSH avec utilisateur Active Directory
 
-![SSH avec utilisateur AD](06_ssh_connexion_ad.png)
+![SSH avec utilisateur AD](ssh_Administrateur.png)
 
 **Commande** : `ssh Administrateur@homelab.local@192.168.2.2`
 
@@ -93,7 +93,7 @@ klist
 
 ### 7. Droits sudo via Active Directory
 
-![sudo -l pour linux-admins](07_sudo_l_admin.png)
+![sudo -l pour linux-admins](sudo-l.png)
 
 **Commande** : `sudo -l`
 
@@ -108,7 +108,7 @@ klist
 
 ### 8. Ordinateurs joints au domaine
 
-![Vue AD - Ordinateurs](08_ad_computers.png)
+![Vue AD - Ordinateurs](ordinateur_connecter_au_domaine.jpg)
 
 **Source** : Active Directory Users and Computers (Windows Server)
 
@@ -121,7 +121,8 @@ klist
 
 ### 9. Groupes de sécurité Linux
 
-![Groupes linux-users et linux-admins](09_ad_groupes_linux.png)
+![Groupes linux-users](Vue_groupe_linux_users.jpg)
+![Groupes linux-admins](Vue_groupe_linux_admins.jpg)
 
 **Source** : Active Directory Users and Computers (Windows Server)
 
@@ -134,7 +135,7 @@ klist
 
 ### 10. Windows 10 joint au domaine
 
-![systeminfo Windows 10](10_windows10_domaine.png)
+![systeminfo Windows 10](Windows10_joint_au_domaine.jpg)
 
 **Commande** : `systeminfo | findstr Domaine`
 
@@ -162,6 +163,6 @@ Ces screenshots démontrent :
 ## 🔗 Documentation complète
 
 * 📄 [Compte-rendu du projet](../Documents/Projet_Active_Directory_Linux_Compte_rendu.pdf)
-* 🐛 [Guide de dépannage](../TROUBLESHOOTING.md)
+* 🐛 [Guide de dépannage](../troubleshooting.md)
 * 💻 [Scripts d'installation](../Script/)
 * 🗺️ [Schémas réseau](../Diagrammes/)
