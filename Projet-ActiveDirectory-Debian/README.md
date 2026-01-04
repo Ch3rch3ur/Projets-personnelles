@@ -31,8 +31,9 @@ Mettre en place une **authentification centralisée Active Directory** pour des 
   * Active Directory Domain Services
   * DNS
   * Kerberos (KDC)
-* **Debian GNU/Linux** (clients du domaine)
-  * realmd, SSSD, PAM, NSS
+* **Clients du domaine**
+  * Debian GNU/Linux (realmd, SSSD, PAM, NSS)
+  * Windows 10 LTSC 32 bits
 * **pfSense** (routeur/firewall)
 * **Domaine** : `homelab.local`
 
@@ -63,9 +64,23 @@ Mettre en place une **authentification centralisée Active Directory** pour des 
 
 ---
 
+## 🖥️ Extension de l'infrastructure : Client Windows 10
+
+Après validation de l'intégration Linux, ajout d'un client Windows 10 LTSC 32 bits pour :
+
+* Valider l'**interopérabilité** Linux/Windows dans le même domaine
+* Reproduire un **environnement d'entreprise réaliste** (parc mixte)
+* Optimiser les ressources matérielles (version LTSC allégée + 32 bits)
+
+**Durée d'intégration** : ~15 minutes sans incident technique
+
+**Tests validés** : Authentification AD, application GPO, accès ressources réseau
+
+---
+
 ## 🔧 Technologies utilisées
 
-`Kerberos` `SSSD` `PAM` `NSS` `realmd` `DNS` `LDAP` `Windows Server 2022` `Debian 12` `pfSense`
+`Kerberos` `SSSD` `PAM` `NSS` `realmd` `DNS` `LDAP` `Windows Server 2022` `Debian 12` `Windows 10 LTSC` `pfSense`
 
 ---
 
@@ -96,6 +111,7 @@ Au cours du projet, plusieurs incidents ont permis de distinguer clairement les 
 ## 📊 Résultats
 
 * ✅ Intégration complète et fonctionnelle entre Active Directory et Linux
+* ✅ Extension réussie avec client Windows 10 (parc mixte Linux/Windows)
 * ✅ Infrastructure stable et reproductible
 * ✅ Tests validés avec comptes autorisés et non autorisés
 * ✅ Accès SSH et droits sudo vérifiés et conformes
@@ -108,7 +124,7 @@ Au cours du projet, plusieurs incidents ont permis de distinguer clairement les 
 * 💻 [Scripts d'installation](Script/) - Scripts Bash avec notes d'installation
 * 🗺️ [Schémas réseau](Diagrammes/) - Topologie de l'infrastructure
 * 🐛 [Guide de dépannage](TROUBLESHOOTING.md) - Problèmes rencontrés et solutions détaillées
-* 💻 [Screenshoots](Screenshoots/) - Capture d'écran de bon fonctionne 
+* 📸 [Screenshots](Screenshots/) - Captures d'écran du fonctionnement
 
 ---
 
