@@ -121,9 +121,7 @@ Au cours du projet, plusieurs incidents ont nécessité une approche méthodique
 
 ---
 
-## 🌐 Flux réseau et modèle OSI
-
-### Architecture DNS (critique)
+## Architecture DNS (critique)
 
 ```
 Client Debian GLPI
