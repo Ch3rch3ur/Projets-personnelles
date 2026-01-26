@@ -135,7 +135,7 @@ Au cours du projet, plusieurs incidents ont nécessité une approche méthodique
 * **Problème** : `wget` retourne erreur 404 Not Found pour toutes les versions testées
 * **Solution** : Téléchargement manuel depuis le navigateur Firefox de la VM Debian
 
-👉 **Détails et commandes de résolution** : [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+👉 **Détails et commandes de résolution** : [TROUBLESHOOTING.md](troubleshooting.md)
 
 ---
 
@@ -174,10 +174,10 @@ Les tests suivants ont été réalisés avec succès :
 ## 📚 Documentation
 
 * 📄 [Compte-rendu complet (PDF)](Documents/compte_rendu.pdf) - Analyse détaillée avec problèmes rencontrés et solutions
-* 🔧 [Procédure d'installation (PDF)](Documents/procedure_installation.pdf) - Guide pas à pas du déploiement
-* 🗺️ [Topologie réseau](Topologie_reseau/) - Schéma de l'infrastructure
-* 🐛 [Guide de dépannage](TROUBLESHOOTING.md) - Problèmes rencontrés et solutions détaillées
-* 💻 [Scripts d'installation](Scripts/) - Scripts Bash pour automatisation
+* 📄 [Procédure technicien N1 (PDF)](Documents/Procedure_base_de_connaissance_technicien/) - Analyse détaillée avec problèmes rencontrés et solutions
+* 🗺️ [Topologie réseau](Diagrammes/) - Schéma de l'infrastructure
+* 🐛 [Guide de dépannage](troubleshooting.md) - Problèmes rencontrés et solutions détaillées
+* 💻 [Scripts d'installation](Script/) - Scripts Bash pour automatisation
 
 ---
 
