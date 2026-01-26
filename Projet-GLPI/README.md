@@ -174,7 +174,7 @@ Les tests suivants ont été réalisés avec succès :
 ## 📚 Documentation
 
 * 📄 [Compte-rendu complet (PDF)](Documents/compte_rendu.pdf) - Analyse détaillée avec problèmes rencontrés et solutions
-* 📄 [Procédure technicien N1 (PDF)](Documents/Procedure_base_de_connaissance_technicien/) - Analyse détaillée avec problèmes rencontrés et solutions
+* 📄 [Procédure technicien N1 (PDF)](Documents/Procedure_base_de_connaissance_technicien/) - Procédure mise en place pour les techiciens support N1.
 * 🗺️ [Topologie réseau](Diagrammes/) - Schéma de l'infrastructure
 * 🐛 [Guide de dépannage](troubleshooting.md) - Problèmes rencontrés et solutions détaillées
 * 💻 [Scripts d'installation](Script/) - Scripts Bash pour automatisation
