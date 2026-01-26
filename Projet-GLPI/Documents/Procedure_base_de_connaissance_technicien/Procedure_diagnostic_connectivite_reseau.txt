@@ -1,0 +1,44 @@
+Catégorie : Réseau - Connectivité
+Sujet : Procédure - Diagnostic connectivité réseau
+Contenu : Diagnostic de connectivité réseau (approche OSI TCP/IP)
+
+Symptôme
+
+    - "Pas d'accès à Internet"
+    - "Impossible d'accéder au ressources réseau"
+
+Procédure de diagnostic (modèle OSI)
+
+Couche 1 - Physique
+
+    - Vérifier le câble réseau (branché, endommagé ?)
+    - Vérifier les voyants de la carte réseau (activité ?)
+    - Tester un autre port réseau si possible
+
+Couche 2 - Liaison 
+
+    - Vérifier l'état de la carte réseau (Gestionnaire de périphériques)
+    - Vérifier que la carte réseau est activée
+
+Couche 3 - Réseau
+
+Commande : ' ipconfig /all '
+
+    - Vérifier attributions IP (DHCP)
+    - Passerelle par défaut présente ? 
+    - Ping vers la passerelle 
+
+Couche 4 - 7 Transport - Application
+
+    - Test écho (ping) vers DNS : ' ping 192.168.2.3 '
+    - Test de résolution : ' nslookup google.com '
+    - Test connectivité Internet : ' ping 8.8.8.8 '
+
+Actions correctives courantes 
+
+    - Renouvellement IP : ' ifconfig /release ' puis ' ipconfig /renew '
+    - Vider le cache DNS : ' ipconfig /flusdns '
+    - Redémarrer la carte réseau
+    - Vérifier pare-feu Windows
+
+Temps estimé : 15 - 20 minutes , Niveau : N1

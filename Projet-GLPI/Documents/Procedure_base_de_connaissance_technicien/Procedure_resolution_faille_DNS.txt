@@ -1,0 +1,48 @@
+Catégorie : Réseau - Connectivité
+Sujet : Procédure - Résolutions DNS défaillante
+Contenu : Diagnostic problème DNS
+
+Symptôme
+
+    - Impossible de trouver le serveur
+    - Sites Web inaccessibles par nom
+    - Mais ping par IP fonctionne 
+
+Diagnostic 
+
+1. Vérifier la configuration DNS 
+
+Commande : ' ipconfig /all '
+
+    - Serveur DNS configuré ?
+    - DNS attendu : 192.168.2.3 (AD)
+
+2. Tester résolution
+
+Commande : ' nslookup homelab.local ' 
+
+Commande : ' nslookup google.com '
+
+3. Vider le cache DNS
+
+Commande : ' ipconfig /flushdns '
+
+4. Vérifier fichier hosts
+
+Pour un client Windows : C:\Windows\System32\drivers\etc\hosts
+
+    - Vérifier qu'il n'y a pas d'entrées problématiques
+
+Actions correctives
+
+    - Configurer DNS manuellement si DCHP défaillant 
+    - Redémarrer service DNS Client 
+    - Réinitialiser la pile TCP/IP : ' netsh int ip rest ' ' netsh winsock reset '
+
+Escalade vers N2 si :
+
+    - Problème serveur DNS
+    - Problème DHCP serveur 
+    - Configuration DNS au niveau AD
+
+Temps estimé : 10 minutes , Niveau : N1

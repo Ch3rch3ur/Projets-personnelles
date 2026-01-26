@@ -1,0 +1,28 @@
+Catégorie : Accès et comptes
+Sujet : Procédure - Réinitialisation mot de passe Active Directory
+Contenu : Réinitialisation de mot de passe utilisateur AD
+
+Symptômes
+
+    - Utilisateur ne peux plus ce connecter
+    - Message "Mot de passe incorrect"
+    - Compte potentiellement verrouillé
+
+
+Procédure 
+
+    - Se connecter au contrôleur de domaine
+    - Ouvrir "Active Directory Utilisateurs et Ordinateurs"
+    - Localiser l'utilisateur (OU appropriée)
+    - Clic droit -> Réinitialiser le mot de passe"
+    - Définir mot de passe temporaire (respectant la politique)
+    - Cocher "L'utilisateur doit changer son mot de passe à la prochaine ouverture de session" 
+    - Si le compte verrouillé: Décocher "Déverrouiller le compte"
+
+
+Vérification 
+
+    - Tester la connexion avec le mot de passe temporaire 
+    - Confirmer avec l'utilisateur le changement de mot de passe 
+
+Temps estimé : 5 - 10 minutes , Niveau : N1
