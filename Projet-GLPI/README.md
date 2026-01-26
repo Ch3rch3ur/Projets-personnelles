@@ -186,11 +186,11 @@ Les tests suivants ont été réalisés avec succès :
 ### Techniques
 
 * Administration système Linux (Debian, Apache, MariaDB, permissions)
-* Intégration LDAP/Active Directory (bind, filtres, attributs)
+* Intégration LDAP/Active Directory (filtres, attributs)
 * Gestion de services ITSM (GLPI, ticketing, SLA, catégorisation)
 * Diagnostic réseau (modèle OSI, DNS, connectivité, forwarders)
 * Sécurisation (HTTPS, gestion des mots de passe, permissions Unix)
-* Virtualisation (VirtualBox, snapshots, optimisation ressources)
+* Virtualisation (VirtualBox, optimisation ressources)
 
 ### Méthodologiques
 
@@ -199,13 +199,6 @@ Les tests suivants ont été réalisés avec succès :
 * Gestion des priorités (SLA, escalade N2)
 * Résolution de problèmes (approche méthodique, diagnostic par élimination)
 * Autonomie (recherche de solutions, adaptation aux contraintes)
-
-### Transversales
-
-* Rigueur (snapshots progressifs, validation à chaque étape)
-* Persévérance (résolution de multiples blocages techniques)
-* Adaptabilité (contournement des limitations matérielles : 8 Go RAM, 3 VM max)
-* Pragmatisme (solutions open source, optimisation des ressources)
 
 ---
 
