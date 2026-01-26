@@ -43,6 +43,24 @@ Déployer et **exploiter** un système ITSM (IT Service Management) open source 
 
 **Principe** : GLPI s'authentifie auprès d'Active Directory via LDAP pour centraliser la gestion des utilisateurs et des accès.
 
+### Architecture DNS 
+
+```
+Client Debian GLPI
+    ↓ (DNS: 192.168.2.3 via DHCP pfSense)
+Active Directory / DNS (192.168.2.3)
+    ├─→ Requêtes internes (homelab.local) → résout directement
+    └─→ Requêtes externes (github.com, etc.)
+            ↓ (Forwarders)
+        DNS 8.8.8.8 / 1.1.1.1
+            ↓
+        Internet
+```
+
+**Point critique** : Sans forwarders DNS configurés sur l'AD, le serveur GLPI ne peut pas résoudre les noms externes (mise à jour système, téléchargement GLPI, etc.).
+
+---
+
 ### 📸 Topologie réseau
 
 ![Schéma réseau](Topologie_reseau/schema_infrastructure.png)
@@ -118,24 +136,6 @@ Au cours du projet, plusieurs incidents ont nécessité une approche méthodique
 * **Solution** : Téléchargement manuel depuis le navigateur Firefox de la VM Debian
 
 👉 **Détails et commandes de résolution** : [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
-
----
-
-## Architecture DNS
-
-```
-Client Debian GLPI
-    ↓ (DNS: 192.168.2.3 via DHCP pfSense)
-Active Directory / DNS (192.168.2.3)
-    ├─→ Requêtes internes (homelab.local) → résout directement
-    └─→ Requêtes externes (github.com, etc.)
-            ↓ (Forwarders)
-        DNS 8.8.8.8 / 1.1.1.1
-            ↓
-        Internet
-```
-
-**Point critique** : Sans forwarders DNS configurés sur l'AD, le serveur GLPI ne peut pas résoudre les noms externes (mise à jour système, téléchargement GLPI, etc.).
 
 ---
 
@@ -219,5 +219,4 @@ Les tests suivants ont été réalisés avec succès :
 * Certificat SSL valide : Utilisation de Let's Encrypt
 * Séparation des données : Déplacement de `/var/www/glpi/files` hors du webroot
 * Automatisation : Scripts Ansible pour déploiement reproductible
-
 
