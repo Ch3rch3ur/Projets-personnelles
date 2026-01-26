@@ -66,7 +66,7 @@ Déployer et **exploiter** un système ITSM (IT Service Management) open source 
 
 ✅ **20 tickets d'incidents créés et résolus** couvrant :
 * Accès et comptes (mots de passe expirés, demandes d'accès)
-* Réseau et connectivité (DNS, VPN, Internet)
+* Réseau et connectivité (DNS, Internet)
 * Matériel - Postes de travail (performances, démarrage)
 * Logiciels et applications (Office, navigateurs, licences)
 * Périphériques (imprimantes, souris, clés USB)
@@ -98,7 +98,6 @@ Au cours du projet, plusieurs incidents ont nécessité une approche méthodique
 ### Extension du disque VirtualBox et conflit swap
 * **Problème** : Disque Debian initial insuffisant pour GLPI, extension nécessaire
 * **Impact** : Impossible d'étendre la partition avec swap active, conflit après recréation
-* **Résultat** : Swap désactivée à chaque redémarrage → performances dégradées (3 VM, 8 Go RAM hôte)
 * **Solution** : Suppression de l'ancienne référence swap dans `/etc/fstab`, configuration du nouveau swap
 
 ### Incompatibilité PHP 8.4
@@ -112,7 +111,7 @@ Au cours du projet, plusieurs incidents ont nécessité une approche méthodique
 ### Import LDAP : "Aucun utilisateur à importer"
 * **Problème** : Test connexion réussi mais aucun utilisateur trouvé lors de l'import
 * **Cause** : Attribut d'identifiant configuré avec `uid` au lieu de `sAMAccountName`
-* **Solution** : Correction du champ "Champ de l'identifiant" en `sAMAccountName` (respecter la casse)
+* **Solution** : Correction du champ "Champ de l'identifiant" en `sAMAccountName`
 
 ### Téléchargement GLPI échoue avec wget
 * **Problème** : `wget` retourne erreur 404 Not Found pour toutes les versions testées
