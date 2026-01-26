@@ -65,7 +65,7 @@ Active Directory / DNS (192.168.2.3)
 
 ![Schéma réseau](Diagrammes/Topologie-Réseau-GLPI.png)
 
-📁 [Voir la topologie détaillée →](Diagramemes/)
+📁 [Voir la topologie détaillée →](Diagrammes/)
 
 ---
 
