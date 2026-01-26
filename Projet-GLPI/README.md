@@ -121,7 +121,7 @@ Au cours du projet, plusieurs incidents ont nécessité une approche méthodique
 
 ---
 
-## Architecture DNS (critique)
+## Architecture DNS
 
 ```
 Client Debian GLPI
