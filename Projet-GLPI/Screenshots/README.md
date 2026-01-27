@@ -39,7 +39,7 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 ![Ticket détaillé](04-ticket-exemple-complet.png)
 
-(04b-ticket-exemple-complet.png)
+![Ticket détaillé suite](04b-ticket-exemple-complet.png)
 
 **Ticket** : "Impossible de me connecter à mon poste"
 
