@@ -923,23 +923,17 @@ L'erreur PHP 8.4 aurait pu être évitée en consultant la documentation GLPI av
 
 `sAMAccountName` (AD) vs `uid` (OpenLDAP) : cette confusion est très courante et difficile à diagnostiquer.
 
-### 4. La casse compte en LDAP
 
-`sAMAccountName` ≠ `uid`. Active Directory est sensible à la casse pour les attributs.
-
-### 5. ldapsearch est une commande de vérification indispensable 
+### 4. ldapsearch est une commande de vérification indispensable 
 
 Tester les requêtes LDAP en ligne de commande AVANT de les configurer dans l'application évite beaucoup de pertes de temps.
 
-### 6. Les logs sont essentiels
 
-`/var/log/apache2/error.log` et `systemctl status` ont été déterminants pour identifier les problèmes.
-
-### 7. Les versions applicatives évoluent
+### 5. Les versions applicatives évoluent
 
 MariaDB 10.6+ et Debian 12 ont introduit des changements dans les noms de commandes et de paquets. Toujours consulter la documentation de la version exacte utilisée.
 
-### 8. En environnement contraint, le swap est critique
+### 6. En environnement contraint, le swap est critique
 
 Avec 3 VM simultanées et 8 Go RAM sur l'hôte, le swap est indispensable pour la stabilité. Une mauvaise configuration peut dégrader drastiquement les performances.
 
