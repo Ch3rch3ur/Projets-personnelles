@@ -38,7 +38,7 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 ### 3. Exemple de ticket complet - Incident mot de passe AD
 
 ![Ticket détaillé](04-ticket-exemple-complet.png)
-![Ticket détaillé] (04b-ticket-exemple-complet.png)
+![suite] (04b-ticket-exemple-complet.png)
 
 **Ticket** : "Impossible de me connecter à mon poste"
 
