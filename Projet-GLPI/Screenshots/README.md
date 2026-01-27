@@ -44,7 +44,7 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 **Ticket** : "Impossible de me connecter à mon poste"
 
 **Démontre** :
-- **Demandeur** : Marie Martin (utilisatrice AD)
+- **Demandeur** : Greg Hollande (utilisatrice AD)
 - **Technicien assigné** : Jean Dupont
 - **Catégorie** : Accès et comptes
 - **Priorité** : Haute
