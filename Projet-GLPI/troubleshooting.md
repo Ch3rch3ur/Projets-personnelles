@@ -71,7 +71,7 @@ Swap:            0B          0B          0B
 
 **Impact critique** : Avec 3 VM actives simultanément et seulement 8 Go RAM sur l'hôte, l'absence de swap provoque des ralentissements importants et des risques de freeze de la VM.
 
-### Diagnostic étape par étape
+### Diagnostic
 
 #### Hypothèse initiale
 
@@ -301,6 +301,7 @@ sudo update-initramfs -u
 - Toujours tester avec `swapoff -a && swapon -a`
 - En environnement RAM contraint, le swap est **structurel**, pas optionnel
 - VirtualBox n’automatise **jamais** la cohérence Linux (fstab / initramfs)
+
 ✅ **Lors de l'extension d'un disque virtuel, toujours vérifier `/etc/fstab`** après modification des partitions  
 ✅ **Les anciennes références de partitions supprimées peuvent causer des conflits**  
 ✅ **En environnement contraint (8 Go RAM, 3 VM), le swap est CRITIQUE pour la stabilité**  
