@@ -9,10 +9,9 @@
 **Problèmes rencontrés** :
 1. **Extension disque VirtualBox et conflit swap** : Performances dégradées → Suppression ancienne référence swap
 2. **Incompatibilité PHP 8.4** : GLPI ne supporte que PHP 8.2 → Downgrade via dépôt Sury
-3. **Droits de fichiers GLPI** : Permissions refusées à l'installation → chmod 775 sur config/files/marketplace
-4. **Import LDAP impossible** : Attribut `uid` au lieu de `sAMAccountName` → Correction critique
-5. **Commandes incompatibles** : Changements de noms selon versions (MariaDB, PHP)
-6. **Téléchargement GLPI échoue** : wget retourne 404 → Téléchargement manuel via navigateur
+3. **Téléchargement GLPI échoue** : wget retourne 404 → Téléchargement manuel via navigateur
+4. **Droits de fichiers GLPI** : Permissions refusées à l'installation → chmod 775 sur config/files/marketplace
+5. **Import LDAP impossible** : Attribut `uid` au lieu de `sAMAccountName` → Correction critique
 
 **Compétences démontrées** : Gestion du stockage virtualisé, diagnostic méthodique (logs, ldapsearch), résolution autonome d'incidents complexes, compréhension Active Directory/LDAP, gestion versions applicatives
 
@@ -43,7 +42,7 @@ Le déploiement de GLPI intégré à Active Directory repose sur une **chaîne d
 
 ---
 
-## 1. 💾 Extension du disque VirtualBox et conflit swap (PROBLÈME MAJEUR)
+## 1. 💾 Extension du disque VirtualBox et conflit swap
 
 ### Contexte
 
@@ -74,6 +73,12 @@ Swap:            0B          0B          0B
 
 ### Diagnostic étape par étape
 
+#### Hypothèse initiale
+
+Le swap existe physiquement mais **n’est pas activé automatiquement** au démarrage.
+
+---
+
 #### Étape 1 : Vérifier l'état du swap
 
 ```bash
@@ -81,12 +86,6 @@ swapon --show
 ```
 
 **Résultat** : Aucune sortie (pas de swap actif)
-
-```bash
-cat /proc/swaps
-```
-
-**Résultat** : Fichier vide
 
 ---
 
@@ -144,72 +143,164 @@ sudo blkid | grep swap
 
 ### Solution appliquée
 
-#### Étape 1 : Éditer /etc/fstab pour supprimer l'ancienne référence
+#### Étape 1 : Identification
+
+Lister les partitions et confirmer l’existence de la partition swap :
+
+```bash
+lsblk -f
+```
+
+Constat:
+- `/dev/sda5` est bien de type `swap`
+- Aucun swap actif
+
+Vérification:
+
+```bash
+sudo swapon --show
+```
+
+Résultat: **aucune sortie** → aucun swap utilisé.
+
+---
+
+#### Étape 2 : Nettoyage (ancienne configuration)
+
+Désactivation complète de tout swap déclaré :
+
+```bash
+sudo swapoff -a
+```
+
+Nettoyage du fichier `/etc/fstab`:
 
 ```bash
 sudo nano /etc/fstab
 ```
 
-**Contenu avant modification** :
-
-```
-UUID=xxxx-xxxx-xxxx / ext4 errors=remount-ro 0 1
-UUID=yyyy-yyyy-yyyy none swap sw 0 0    ← À SUPPRIMER
-UUID=zzzz-zzzz-zzzz none swap sw 0 0    ← À CONSERVER
-```
-
-**Contenu après modification** :
-
-```
-UUID=xxxx-xxxx-xxxx / ext4 errors=remount-ro 0 1
-UUID=zzzz-zzzz-zzzz none swap sw 0 0
-```
-
-**Sauvegarder** : `Ctrl+O` → `Entrée` → `Ctrl+X`
+Action:
+- Commenter (`#`) de **l'ancienne ligne swap avec UUID invalide**
+- Aucune modification sur `/dev/sr0` (lecteur CD-ROM virtuel)
 
 ---
 
-#### Étape 2 : Activer manuellement le swap
+#### Étape 3 : Préparation du swap
+
+Recréation du swap pour forcer une configuration saine :
 
 ```bash
-sudo swapon -a
+sudo mkswap -f /dev/sda5
 ```
 
-**Vérifier** :
-
-```bash
-free -h
-```
-
-**Résultat attendu** :
-
-```
-              total        used        free      shared  buff/cache   available
-Mem:          1.0Gi       450Mi       200Mi        10Mi       350Mi       400Mi
-Swap:         2.0Gi          0B       2.0Gi    ← Swap activé !
-```
+Effet:
+- Nouveau header swap
+- **Nouvel UUID généré (noter-le !)**
 
 ---
 
-#### Étape 3 : Vérifier que le swap est activé au redémarrage
+#### Étape 4 : Activation
+
+Activation manuelle :
 
 ```bash
-sudo reboot
+sudo swapon /dev/sda5
 ```
 
-**Après redémarrage, vérifier** :
+Vérification:
 
 ```bash
-free -h
 swapon --show
 ```
 
-**Résultat** : ✅ **Swap activé automatiquement au démarrage**
+Résultat attendu:
+- `/dev/sda5` visible 
+- Taille ~ 1.1G
+- Swap fonctionnel
 
 ---
 
-### Leçon apprise
+#### Étape 5 : Persistance 
 
+Récupération de l’UUID :
+
+```bash
+blkid /dev/sda5
+```
+
+Ajout dans `/etc/fstab`:
+
+```bash
+sudo nano /etc/fstab
+```
+
+Ligne ajoutée:
+
+```bash
+UUID= (noter dans l'étape 3) none swap sw 0 0
+```
+
+Test:
+
+```bash
+sudo swapoff -a
+sudo swapon -a
+```
+
+→ **Aucune erreur = fstab valide**
+
+---
+
+
+#### Étape 6 : Vérification des modifications
+
+```bash
+reboot
+```
+
+Après reboot:
+
+```bash
+free -h
+# ou
+swapon --show
+```
+
+Résultat attendu:
+
+```bash
+Swap:       1.1Gi       0B      1.1Gi
+```
+
+
+
+---
+
+#### Cas particulier : démarrage lent après correction
+
+Symptôme :
+
+- Écran noir ~1 min au boot
+
+Cause :
+
+- Ancien UUID encore présent dans l’initramfs
+
+Correction :
+
+```bash
+sudo update-initramfs -u
+```
+
+---
+
+### Leçons apprise
+
+- Un swap existant ≠ swap fonctionnel
+- `mkswap` régénère l’UUID → **fstab doit être mis à jour**
+- Toujours tester avec `swapoff -a && swapon -a`
+- En environnement RAM contraint, le swap est **structurel**, pas optionnel
+- VirtualBox n’automatise **jamais** la cohérence Linux (fstab / initramfs)
 ✅ **Lors de l'extension d'un disque virtuel, toujours vérifier `/etc/fstab`** après modification des partitions  
 ✅ **Les anciennes références de partitions supprimées peuvent causer des conflits**  
 ✅ **En environnement contraint (8 Go RAM, 3 VM), le swap est CRITIQUE pour la stabilité**  
