@@ -645,7 +645,7 @@ drwxrwxr-x 2 www-data www-data 4096 Jan 26 14:00 /var/www/glpi/marketplace
 
 ---
 
-## 5. 🔍 Import LDAP : "Aucun utilisateur à importer" (PROBLÈME CRITIQUE)
+## 5. 🔍 Import LDAP : "Aucun utilisateur à importer"
 
 ### Symptôme
 
@@ -740,7 +740,7 @@ Configuration → Authentification → Annuaires LDAP → Active Directory Lab �
 Champ de l'identifiant : sAMAccountName
 ```
 
-**⚠️ IMPORTANT** : **Respecter la casse exacte** : `sAMAccountName` ≠ `samaccountname`
+**⚠️ IMPORTANT** : **Respecter la casse exacte** : `sAMAccountName` ≠ `uid`
 
 **Sauvegarder**
 
@@ -784,7 +784,7 @@ Les 3 utilisateurs apparaissent maintenant dans la liste.
 ### Leçon apprise
 
 ✅ **Active Directory utilise `sAMAccountName`, PAS `uid`**  
-✅ **La casse est CRITIQUE en LDAP** : `sAMAccountName` ≠ `samaccountname`  
+✅ **La casse est CRITIQUE en LDAP** : `sAMAccountName` ≠ `uid`  
 ✅ **Tester avec `ldapsearch` permet de valider la configuration** avant de l'appliquer dans GLPI  
 ✅ **Cette erreur est très courante** lors de l'intégration LDAP entre applications et Active Directory
 
@@ -925,9 +925,9 @@ L'erreur PHP 8.4 aurait pu être évitée en consultant la documentation GLPI av
 
 ### 4. La casse compte en LDAP
 
-`sAMAccountName` ≠ `samaccountname`. Active Directory est sensible à la casse pour les attributs.
+`sAMAccountName` ≠ `uid`. Active Directory est sensible à la casse pour les attributs.
 
-### 5. ldapsearch est ton meilleur ami
+### 5. ldapsearch est une commande de vérification indispensable 
 
 Tester les requêtes LDAP en ligne de commande AVANT de les configurer dans l'application évite beaucoup de pertes de temps.
 
