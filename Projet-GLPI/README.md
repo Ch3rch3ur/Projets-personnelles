@@ -122,6 +122,10 @@ Au cours du projet, plusieurs incidents ont nécessité une approche méthodique
 * **Problème** : GLPI 10.0.16 ne supporte que PHP 7.4 à 8.3 (8.4 exclu)
 * **Solution** : Ajout du dépôt Sury, installation de PHP 8.2, désactivation de PHP 8.4
 
+### Téléchargement GLPI échoue avec wget
+* **Problème** : `wget` retourne erreur 404 Not Found pour toutes les versions testées
+* **Solution** : Téléchargement manuel depuis le navigateur Firefox de la VM Debian
+
 ### Droits de fichiers refusés lors de l'installation GLPI
 * **Problème** : "Accès en écriture refusé sur les fichiers de configuration"
 * **Solution** : `chmod -R 775` sur les dossiers `config/`, `files/` et `marketplace/`
@@ -130,10 +134,6 @@ Au cours du projet, plusieurs incidents ont nécessité une approche méthodique
 * **Problème** : Test connexion réussi mais aucun utilisateur trouvé lors de l'import
 * **Cause** : Attribut d'identifiant configuré avec `uid` au lieu de `sAMAccountName`
 * **Solution** : Correction du champ "Champ de l'identifiant" en `sAMAccountName`
-
-### Téléchargement GLPI échoue avec wget
-* **Problème** : `wget` retourne erreur 404 Not Found pour toutes les versions testées
-* **Solution** : Téléchargement manuel depuis le navigateur Firefox de la VM Debian
 
 👉 **Détails et commandes de résolution** : [TROUBLESHOOTING.md](troubleshooting.md)
 
