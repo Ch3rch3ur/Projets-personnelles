@@ -41,7 +41,7 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 ![Ticket détaillé suite](04-ticket-exemple-complet-next.png)
 
-**Ticket** : "Impossible de me connecter à mon poste"
+**Ticket** : "Impossible de me connecter à ma session"
 
 **Démontre** :
 - **Demandeur** : Greg Hollande (utilisatrice AD)
