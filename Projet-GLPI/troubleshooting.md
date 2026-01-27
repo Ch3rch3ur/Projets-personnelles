@@ -471,7 +471,94 @@ sudo rm /var/www/html/phpinfo.php
 
 ---
 
-## 3. 🔐 Droits de fichiers refusés lors de l'installation GLPI
+## 3. 📦 Téléchargement GLPI échoue avec wget
+
+### Symptôme
+
+Lors de la tentative de téléchargement de GLPI avec `wget`, l'erreur 404 Not Found est retournée pour toutes les versions testées.
+
+**Commandes tentées** :
+
+```bash
+wget https://github.com/glpi-project/glpi/releases/download/10.0.17/glpi-10.0.17.tgz
+wget https://github.com/glpi-project/glpi/releases/download/10.0.16/glpi-10.0.16.tgz
+wget https://github.com/glpi-project/glpi/releases/download/10.0.15/glpi-10.0.15.tgz
+```
+
+**Erreur systématique** :
+
+```
+--2026-01-26 14:30:15--  https://github.com/glpi-project/glpi/releases/download/10.0.16/glpi-10.0.16.tgz
+Resolving github.com (github.com)... 140.82.121.4
+Connecting to github.com (github.com)|140.82.121.4|:443... connected.
+HTTP request sent, awaiting response... 404 Not Found
+2026-01-26 14:30:16 ERROR 404: Not Found.
+```
+
+### Diagnostic
+
+#### Étape 1 : Vérifier la connectivité Internet
+
+```bash
+ping -c 4 8.8.8.8
+```
+
+**Résultat** : ✅ Connectivité OK
+
+---
+
+#### Étape 2 : Vérifier la résolution DNS
+
+```bash
+nslookup github.com
+```
+
+**Résultat** : ✅ Résolution OK
+
+---
+
+#### Étape 3 : Tester l'accès HTTPS à GitHub
+
+```bash
+curl -I https://github.com
+```
+
+**Résultat** : ✅ Connexion HTTPS fonctionne
+
+---
+
+### Solution appliquée : Téléchargement manuel
+
+**Cause probable** : URLs obsolètes ou structure GitHub modifiée
+
+**Solution** :
+
+1. **Ouvrir Firefox dans la VM Debian**
+2. **Aller sur** : https://github.com/glpi-project/glpi/releases
+3. **Trouver la version 10.0.16**
+4. **Télécharger** : `glpi-10.0.16.tgz`
+5. **Le fichier est téléchargé dans** : `~/Téléchargements/`
+
+**Installation depuis le fichier téléchargé** :
+
+```bash
+cd ~/Téléchargements
+sudo tar -xzf glpi-10.0.16.tgz -C /var/www/
+sudo chown -R www-data:www-data /var/www/glpi
+sudo chmod -R 755 /var/www/glpi
+```
+
+---
+
+### Leçon apprise
+
+✅ **Les URLs GitHub peuvent changer ou être obsolètes**  
+✅ **En cas d'échec de `wget`, le téléchargement manuel via navigateur est une solution viable**  
+✅ **Toujours vérifier les releases officielles** sur la page GitHub du projet
+
+---
+
+## 4. 🔐 Droits de fichiers refusés lors de l'installation GLPI
 
 ### Symptôme
 
@@ -558,7 +645,7 @@ drwxrwxr-x 2 www-data www-data 4096 Jan 26 14:00 /var/www/glpi/marketplace
 
 ---
 
-## 4. 🔍 Import LDAP : "Aucun utilisateur à importer" (PROBLÈME CRITIQUE)
+## 5. 🔍 Import LDAP : "Aucun utilisateur à importer" (PROBLÈME CRITIQUE)
 
 ### Symptôme
 
@@ -705,161 +792,6 @@ Les 3 utilisateurs apparaissent maintenant dans la liste.
 - Le test de connexion LDAP réussissait
 - Les utilisateurs existaient bien dans AD
 - Le problème ne venait ni du réseau, ni des permissions, mais d'un simple attribut mal configuré
-
----
-
-## 5. ⚙️ Commandes incompatibles selon les versions
-
-### Symptômes
-
-Plusieurs commandes classiques retournent des erreurs "commande introuvable" lors de l'installation.
-
-### Problèmes rencontrés
-
-#### Problème 1 : mysql_secure_installation introuvable
-
-**Commande tentée** :
-
-```bash
-sudo mysql_secure_installation
-```
-
-**Erreur** :
-
-```
-sudo: mysql_secure_installation: commande introuvable
-```
-
-**Cause** : Depuis MariaDB 10.6+, la commande a été renommée.
-
-**Solution** :
-
-```bash
-sudo mariadb-secure-installation
-```
-
----
-
-#### Problème 2 : Paquets PHP avec préfixe de version
-
-**Commandes tentées** :
-
-```bash
-sudo apt install php-mysql
-sudo apt install php-ldap
-```
-
-**Erreur** :
-
-```
-E: Impossible de trouver le paquet php-mysql
-E: Impossible de trouver le paquet php-ldap
-```
-
-**Cause** : Debian 12 utilise des préfixes de version explicites pour PHP.
-
-**Solution** :
-
-```bash
-sudo apt install php8.2-mysql
-sudo apt install php8.2-ldap
-# Etc. pour toutes les extensions
-```
-
----
-
-### Leçon apprise
-
-✅ **Les commandes évoluent entre les versions** : toujours vérifier la documentation de la version exacte utilisée  
-✅ **MariaDB 10.6+ utilise `mariadb-*` au lieu de `mysql-*`**  
-✅ **Debian 12 utilise des préfixes de version explicites** pour les paquets PHP
-
----
-
-## 6. 📦 Téléchargement GLPI échoue avec wget
-
-### Symptôme
-
-Lors de la tentative de téléchargement de GLPI avec `wget`, l'erreur 404 Not Found est retournée pour toutes les versions testées.
-
-**Commandes tentées** :
-
-```bash
-wget https://github.com/glpi-project/glpi/releases/download/10.0.17/glpi-10.0.17.tgz
-wget https://github.com/glpi-project/glpi/releases/download/10.0.16/glpi-10.0.16.tgz
-wget https://github.com/glpi-project/glpi/releases/download/10.0.15/glpi-10.0.15.tgz
-```
-
-**Erreur systématique** :
-
-```
---2026-01-26 14:30:15--  https://github.com/glpi-project/glpi/releases/download/10.0.16/glpi-10.0.16.tgz
-Resolving github.com (github.com)... 140.82.121.4
-Connecting to github.com (github.com)|140.82.121.4|:443... connected.
-HTTP request sent, awaiting response... 404 Not Found
-2026-01-26 14:30:16 ERROR 404: Not Found.
-```
-
-### Diagnostic
-
-#### Étape 1 : Vérifier la connectivité Internet
-
-```bash
-ping -c 4 8.8.8.8
-```
-
-**Résultat** : ✅ Connectivité OK
-
----
-
-#### Étape 2 : Vérifier la résolution DNS
-
-```bash
-nslookup github.com
-```
-
-**Résultat** : ✅ Résolution OK
-
----
-
-#### Étape 3 : Tester l'accès HTTPS à GitHub
-
-```bash
-curl -I https://github.com
-```
-
-**Résultat** : ✅ Connexion HTTPS fonctionne
-
----
-
-### Solution appliquée : Téléchargement manuel
-
-**Cause probable** : URLs obsolètes ou structure GitHub modifiée
-
-**Solution** :
-
-1. **Ouvrir Firefox dans la VM Debian**
-2. **Aller sur** : https://github.com/glpi-project/glpi/releases
-3. **Trouver la version 10.0.16**
-4. **Télécharger** : `glpi-10.0.16.tgz`
-5. **Le fichier est téléchargé dans** : `~/Téléchargements/`
-
-**Installation depuis le fichier téléchargé** :
-
-```bash
-cd ~/Téléchargements
-sudo tar -xzf glpi-10.0.16.tgz -C /var/www/
-sudo chown -R www-data:www-data /var/www/glpi
-sudo chmod -R 755 /var/www/glpi
-```
-
----
-
-### Leçon apprise
-
-✅ **Les URLs GitHub peuvent changer ou être obsolètes**  
-✅ **En cas d'échec de `wget`, le téléchargement manuel via navigateur est une solution viable**  
-✅ **Toujours vérifier les releases officielles** sur la page GitHub du projet
 
 ---
 
