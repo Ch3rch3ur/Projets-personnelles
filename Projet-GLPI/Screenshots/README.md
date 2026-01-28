@@ -167,7 +167,7 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 ### 9b. Configuration des SLA VIP
 
-![SLA vip](08b-sla-configuration-vip.png)
+![Configuration SLA vip b](08-sla-configuration-vip-b.png)
 
 **Source** : Configuration → Niveaux de services → SLAs
 
