@@ -121,10 +121,10 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 **Démontre** :
 - **5 procédures support N1** documentées :
-  1 . Réinitialisation mot de passe Active Directory
-  2 . Diagnostic connectivité réseau (approche OSI)
-  3 . Résolution DNS défaillante
-  4 . Procédure d'escalade N1 → N2
+  1. Réinitialisation mot de passe Active Directory
+  2. Diagnostic connectivité réseau (approche OSI)
+  3. Résolution DNS défaillante
+  4. Procédure d'escalade N1 → N2
 - **Documentation professionnelle** des interventions courantes
 - **Capitalisation des connaissances** pour le support ✅
 
