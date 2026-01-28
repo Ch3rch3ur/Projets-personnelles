@@ -81,18 +81,19 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 ![Statistiques tickets](06-statistiques-tickets.png)
 
-**Source** : Rapports GLPI ou graphique généré depuis glpi_export.csv
+**Source** : Assistance → Statistiques → Tickets - Par ticket
 
 **Démontre** :
-- **Répartition par catégorie** :
-  - Accès et comptes : 5 tickets (25%)
-  - Réseau - Connectivité : 4 tickets (20%)
-  - Matériel - Poste de travail : 4 tickets (20%)
-  - Logiciels et applications : 4 tickets (20%)
-  - Périphériques : 3 tickets (15%)
-- **Temps moyen de résolution** : 10-20 minutes
-- **Taux de respect des SLA** : 100%
-- **Approche professionnelle** avec métriques quantifiables ✅
+- **Performance des techniciens** :
+  - Nombres de tickets ouverts/résolus/fermés par technicien
+  - Délai moyen de résolution par technicien
+  - Taux de statisfaction client
+  - Tickets en retard
+- **Indicateurs de qualité** :
+  - Satisfaction moyenne :
+  - Délai moyen de résolution : X heures
+  - Taux de réponse aux enquêtes de satisfaction
+- **Approche professionnelle** avec suivi quantifiable des performances ✅
 
 ---
 
