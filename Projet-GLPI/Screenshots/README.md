@@ -165,6 +165,23 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 ---
 
+### 9b. Configuration des SLA VIP
+
+![Configuration SLA vip](08-sla-configuration-vip.png)
+
+**Source** : Configuration → Niveaux de services → SLAs
+
+**Démontre** :
+- **SLA selon priorité** :
+  - Urgence Haute : TTR 2 heures
+  - Urgence Moyenne : TTR 4 heures
+  - Urgence Basse : TTR 8 heures
+- **Gestion des délais** de résolution
+- **Règles métier** pour application automatique des SLA
+- **Approche ITIL** dans la gestion des incidents ✅
+
+---
+
 ### 10. Profils et habilitations
 
 ![Profils utilisateurs](09-profils-utilisateurs.png)
