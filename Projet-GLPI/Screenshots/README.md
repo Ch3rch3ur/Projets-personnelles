@@ -269,4 +269,3 @@ Ces screenshots démontrent :
 * 📄 [Procédure technicien N1](../Documents/Procedure_base_de_connaissance_technicien/)
 * 🐛 [Guide de dépannage](../troubleshooting.md)
 * 🗺️ [Topologie réseau](../Diagrammes/)
-* 📊 [Données brutes tickets (CSV)](../Documents/glpi.csv)
