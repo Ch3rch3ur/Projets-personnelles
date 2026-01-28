@@ -56,6 +56,27 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 ---
 
+### 3b. Exemple de ticket complet - VIP
+
+![Ticket détaillé VIP](04-ticket-exemple-complet-vip.png)
+
+![Ticket détaillé VIP suite](04b-ticket-exemple-complet-vip.png)
+
+**Ticket** : "Impossible d'accéder au portail"
+
+**Démontre** :
+- **Demandeur** : Marie Martin (utilisatrice AD - client VIP)
+- **Technicien assigné** : Jean Dupont
+- **Catégorie** : Réseau - Accès à Internet
+- **Priorité** : Haute
+- **Description utilisateur** : problème formulé de manière non technique
+- **Diagnostic technicien** : méthodologie appliquée (vérification AD, identification cause)
+- **Actions réalisées** : étapes de résolution documentées
+- **Solution** : résolution claire et vérifiable
+- **Méthodologie support N1** : prise en charge → diagnostic → action → résolution ✅
+
+---
+
 ### 4. Statistiques et métriques
 
 ![Statistiques tickets](06-statistiques-tickets.png)
