@@ -81,18 +81,15 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 ![Statistiques tickets](06-statistiques-tickets.png)
 
-**Source** : Assistance → Statistiques → Tickets - Par ticket
+**Source** : Assistance → Statistiques → Tickets
 
 **Démontre** :
 - **Performance des techniciens** :
   - Nombres de tickets ouverts/résolus/fermés par technicien
-  - Délai moyen de résolution par technicien
-  - Taux de statisfaction client
+  - Délai moyen de résolution
   - Tickets en retard
 - **Indicateurs de qualité** :
-  - Satisfaction moyenne :
-  - Délai moyen de résolution : X heures
-  - Taux de réponse aux enquêtes de satisfaction
+  - Non créer pour le projet
 - **Approche professionnelle** avec suivi quantifiable des performances ✅
 
 ---
