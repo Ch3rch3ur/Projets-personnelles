@@ -185,16 +185,18 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 ![règles metier sla](10-regles-metier-sla.png)
 
-**Source** : Administration → Profils - Technicien → Utilisateurs
+**Source** : Administration → Règles → Règles métier pour un les tickets
 
 **Démontre** :
-- **Profils GLPI** :
-  - Super-Admin (glpi)
-  - Technicien (jdupont, bgirare, jlegrand)
-  - Self-Service (mmartin (VIP), pleroy)
-- **Séparation des privilèges** selon les rôles
-- **Gestion des droits** : techniciens peuvent traiter les tickets, utilisateurs peuvent uniquement créer
-- **Sécurité** : accès limité selon les responsabilités ✅
+- Règles d'application automatiques des SLA selon priorité :
+   - Basse
+   - Moyenne
+   - Haute
+   - VIP
+- Action mise en place en fonction du niveau de priorité :
+   - Ticket assigner
+   - Durée du TTR
+   - Durée du TTO 
 
 ---
 
@@ -212,6 +214,18 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 - **Séparation des privilèges** selon les rôles
 - **Gestion des droits** : techniciens peuvent traiter les tickets, utilisateurs peuvent uniquement créer
 - **Sécurité** : accès limité selon les responsabilités ✅
+
+---
+
+### 12. Interface utilisateur
+
+![Interface utilisateur](11-interface-utilisateur.png)
+
+**Connecté en tant que** : Marie Martin (Self-Service)
+
+**Démontre** :
+- Vue simplifiée Self-Service
+- Interface de création de ticket utilisateur
 
 ---
 
