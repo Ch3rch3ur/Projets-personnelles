@@ -183,6 +183,23 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 ### 10. Profils et habilitations
 
+![Règle métier SLA](10-règles-metier-sla.png)
+
+**Source** : Administration → Profils - Technicien → Utilisateurs
+
+**Démontre** :
+- **Profils GLPI** :
+  - Super-Admin (glpi)
+  - Technicien (jdupont, bgirare, jlegrand)
+  - Self-Service (mmartin (VIP), pleroy)
+- **Séparation des privilèges** selon les rôles
+- **Gestion des droits** : techniciens peuvent traiter les tickets, utilisateurs peuvent uniquement créer
+- **Sécurité** : accès limité selon les responsabilités ✅
+
+---
+
+### 11. Profils et habilitations
+
 ![Profils utilisateurs](09-profils-utilisateurs.png)
 
 **Source** : Administration → Profils - Technicien → Utilisateurs
