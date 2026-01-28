@@ -115,7 +115,7 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 ### 7. Base de connaissances - Liste des procédures
 
-![Base de connaissances](07-base-connaissances.png)
+![Base de connaissances](07-base-connaissance.png)
 
 **Source** : Outils → Base de connaissances
 
@@ -123,9 +123,8 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 - **5 procédures support N1** documentées :
   1. Réinitialisation mot de passe Active Directory
   2. Diagnostic connectivité réseau (approche OSI)
-  3. Incident VPN
-  4. Résolution DNS défaillante
-  5. Procédure d'escalade N1 → N2
+  3. Résolution DNS défaillante
+  4. Procédure d'escalade N1 → N2
 - **Documentation professionnelle** des interventions courantes
 - **Capitalisation des connaissances** pour le support ✅
 
@@ -157,9 +156,9 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 **Démontre** :
 - **SLA selon priorité** :
-  - Urgence Haute : TTR 4 heures
-  - Urgence Moyenne : TTR 8 heures
-  - Urgence Basse : TTR 24 heures
+  - Urgence Haute : TTR 2 heures
+  - Urgence Moyenne : TTR 4 heures
+  - Urgence Basse : TTR 8 heures
 - **Gestion des délais** de résolution
 - **Règles métier** pour application automatique des SLA
 - **Approche ITIL** dans la gestion des incidents ✅
@@ -170,13 +169,13 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 ![Profils utilisateurs](09-profils-utilisateurs.png)
 
-**Source** : Administration → Profils ou Habilitations utilisateur
+**Source** : Administration → Profils - Technicien → Utilisateurs
 
 **Démontre** :
 - **Profils GLPI** :
   - Super-Admin (glpi)
-  - Technicien (jdupont)
-  - Self-Service (mmartin, pleroy)
+  - Technicien (jdupont, bgirare, jlegrand)
+  - Self-Service (mmartin (VIP), pleroy)
 - **Séparation des privilèges** selon les rôles
 - **Gestion des droits** : techniciens peuvent traiter les tickets, utilisateurs peuvent uniquement créer
 - **Sécurité** : accès limité selon les responsabilités ✅
@@ -190,7 +189,7 @@ Ces screenshots démontrent :
 ✅ **GLPI opérationnel** : Interface fonctionnelle, navigation complète  
 ✅ **Intégration LDAP/AD** : Authentification centralisée, import automatique des utilisateurs  
 ✅ **Exploitation réaliste** : 20+ tickets d'incidents traités avec méthodologie N1  
-✅ **Documentation professionnelle** : 5 procédures support, base de connaissances exploitable  
+✅ **Documentation professionnelle** : 4 procédures support, base de connaissances exploitable  
 ✅ **Gestion des priorités** : SLA configurés selon urgence, respect des délais  
 ✅ **Métriques quantifiables** : Statistiques, répartition par catégorie, temps de résolution  
 
