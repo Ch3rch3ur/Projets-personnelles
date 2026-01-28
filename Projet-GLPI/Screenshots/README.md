@@ -183,7 +183,7 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 ### 10. Règle métier SLA
 
-![Règle metier SLA](10-règles-metier-sla.png)
+![10-règles-metier-sla.png](10-règles-metier-sla.png)
 
 **Source** : Administration → Profils - Technicien → Utilisateurs
 
