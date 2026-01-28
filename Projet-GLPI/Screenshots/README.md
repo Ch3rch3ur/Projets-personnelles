@@ -173,11 +173,10 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 **Démontre** :
 - **SLA selon priorité** :
-  - Urgence Haute : TTR 2 heures
-  - Urgence Moyenne : TTR 4 heures
-  - Urgence Basse : TTR 8 heures
+  - TTR : 2 heures → escalade automatique vers le support N2 **40 minutes avant l'échéance** du ticket.
+  - TTO : 1 heure → ajout automatique du ticket au **groupe d'observation Direction 30 minutes avant l'échéance**.
 - **Gestion des délais** de résolution
-- **Règles métier** pour application automatique des SLA
+- **Règles métier** pour application automatique des SLA **pour les clients VIP**.
 - **Approche ITIL** dans la gestion des incidents ✅
 
 ---
