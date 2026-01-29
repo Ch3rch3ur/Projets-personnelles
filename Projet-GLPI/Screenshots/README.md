@@ -94,6 +94,32 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 ---
 
+### 4b. Statistiques des catégories et des demandeurs
+
+![Statistiques tickets](statistiques-tickets-et-demandeurs.png)
+
+**Source** : Accueil → Tableau de board
+
+**Démontre** :
+- **Répartition par catégorie** :
+  - Matériel - Poste de travail : 5 tickets (25%)
+  - Accès et comptes : 4 tickets (20%)
+  - Logiciels : 4 tickets (20%)
+  - Réseau - Accès à Internet : 3 tickets (15%)
+  - Demande intervention service technique : 2 tickets (10%)
+  - Demande : 1 ticket (5%)
+  - Périphériques : 1 ticket (5%)
+- **Répartition par demandeur** :
+  - Marie Martin : 6 tickets 
+  - Pierre Leroy : 4 tickets 
+  - Greg Hollande : 4 tickets
+  - Claire Moreau : 3 tickets
+  - Paul Durand : 3 tickets
+
+Total : 20 tickets
+
+---
+
 ## 🔐 Intégration Active Directory
 
 ### 5. Configuration LDAP Active Directory
