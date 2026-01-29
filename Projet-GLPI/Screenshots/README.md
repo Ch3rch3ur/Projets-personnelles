@@ -96,7 +96,7 @@ Ce dossier contient les captures d'écran démontrant le fonctionnement de l'inf
 
 ### 4b. Statistiques des catégories et des demandeurs
 
-![Statistiques tickets](statistiques-tickets-et-demandeurs.png)
+![Statistiques tickets](statistique-tickets-et-demandeurs.png)
 
 **Source** : Accueil → Tableau de board
 
