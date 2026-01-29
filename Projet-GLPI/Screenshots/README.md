@@ -291,7 +291,7 @@ Ces screenshots démontrent :
 
 ## 🔗 Documentation complète
 
-* 📄 [Compte-rendu du projet](../Documents/compte_rendu.pdf)
+* 📄 [Compte-rendu du projet](../Documents/Projet_GLPI_compte_rendu.pdf)
 * 📄 [Procédure technicien N1](../Documents/Procedure_base_de_connaissance_technicien/)
 * 🐛 [Guide de dépannage](../troubleshooting.md)
 * 🗺️ [Topologie réseau](../Diagrammes/)
