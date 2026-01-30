@@ -1,6 +1,7 @@
 # Projets personnels – Administration Systèmes & Réseaux
 
 Bonjour,
+
 Je me forme de manière **proactive** à l’**administration systèmes et réseaux**, en réalisant **des projets documentés** conçus pour refléter les défis techniques rencontrés en entreprise. Ces travaux me permettent d’acquérir une expérience concrète et de valider mes compétences techniques.
 
 Ces projets reproduisent des **scénarios réalistes d'entreprise**, incluant :
