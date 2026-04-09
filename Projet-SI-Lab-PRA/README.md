@@ -28,7 +28,7 @@ Assurer une **restauration fonctionnelle complète en moins de 10 minutes** apr�
 - **Automatisation complète** du déploiement via Ansible (Infrastructure as Code)
 - **Supervision en temps réel** avec système d'alertes
 - **Sauvegarde chiffrée et versionnée**
-- **Validation de la résilience** : simulation d'attaques réelles et tests du PRA opérationnel
+- **Validation de la résilience** : simulation d'attaques réelles (DoS, brute-force SSH) et tests du PRA opérationnel
 - **Documentation** des incidents et de la procédures de reprise
 
 ---
