@@ -81,9 +81,9 @@ Assurer une **restauration fonctionnelle complète en moins de 10 minutes** apr�
 
 L’infrastructure repose sur un modèle **reconstructible à la demande** :
 
-- Les services ne sont pas réparés manuellement
-- Ils sont redéployés automatiquement via Ansible
-- Les données sont restaurées depuis les sauvegardes Restic
-- La dissociation des sauvegardes (locales et distantes) garantit la résilience face aux incidents majeurs, y compris les attaques de type ransomware
+- Les services ne sont **pas réparés manuellement**
+- Ils sont **redéployés automatiquement** via Ansible
+- Les données sont **restaurées depuis les sauvegardes Restic**
+- La **dissociation des sauvegardes** (locales et distantes) garantit la résilience face aux incidents majeurs, y compris les **attaques par ransomware**
 
 ---
