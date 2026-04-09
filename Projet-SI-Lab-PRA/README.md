@@ -51,7 +51,6 @@ Assurer une **restauration fonctionnelle complète en moins de 10 minutes** apr�
 - **Rôle** :
   Fournir les services critiques et permettre une **restauration rapide** (PRA).
 
----
 #### 💾 Serveur de sauvegarde distant (srv-backup)
 - **OS** : Debian 12/13 (CLI)
 - **Synchronisation** :
@@ -65,7 +64,6 @@ Assurer une **restauration fonctionnelle complète en moins de 10 minutes** apr�
     - Corruption des données.
     - **Attaques par ransomware**.
 
----
 #### ⚔️ Machine d’attaque (kali-attacker)
 - **OS** : Kali Linux
 - **Rôle** :
