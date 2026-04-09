@@ -4,7 +4,7 @@
 
 Projet autonome réalisé en laboratoire personnel visant à répondre à une problématique concrète rencontrée en entreprise :
 
--- Comment garantir la continuité minimale d’un système d’information **sans haute disponibilité** et avec des ressources limitées ?
+Comment garantir la continuité minimale d’un système d’information **sans haute disponibilité** et avec des ressources limitées ?
 
 Dans de nombreuses PME ou environnements de test, les infrastructures reposent sur une seule machine, où toute panne devient critique. Ce projet propose une solution réaliste basée sur la reconstruction rapide (PRA), une alternative efficace à la tolérance de panne.
 
