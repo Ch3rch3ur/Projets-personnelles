@@ -25,8 +25,8 @@ Assurer une **restauration fonctionnelle complète en moins de 10 minutes** apr�
 
 ### Objectifs techniques
 
-- **Automatiser complète** du déploiement via Ansible (Infrastructure as Code)
-- **Supervision temps réel** avec système d'alertes
+- **Automatisation complète** du déploiement via Ansible (Infrastructure as Code)
+- **Supervision en temps réel** avec système d'alertes
 - **Sauvegarde chiffrée et versionnée**
 - **Validation de la résilience** : simulation d'attaques réelles et tests du PRA opérationnel
 - **Documentation** des incidents et de la procédures de reprise
@@ -63,7 +63,7 @@ Assurer une **restauration fonctionnelle complète en moins de 10 minutes** apr�
   - Protection contre :
     - Perte du serveur principal.
     - Corruption des données.
-    - **Attaques de type ransomware**.
+    - **Attaques par ransomware**.
 
 ---
 #### ⚔️ Machine d’attaque (kali-attacker)
