@@ -1,6 +1,6 @@
 # 🛠️ SI-Lab — Infrastructure résiliente avec Plan de Reprise d'Activité (PRA)
 
-Déploiement d'une infrastructure Debian complète (DNS, Web, VPN, Firewall, Supervision, Sauvegarde), entièrement gérée en Infrastructure as Code via Ansible, et validée par un exercice de Reprise d'Activité (PRA) basé sur une attaque réelle.
+Déploiement d'une infrastructure sur un poste Debian (DNS, Web, VPN, Firewall, Supervision, Sauvegarde), entièrement gérée en Infrastructure as Code via Ansible, et validée par un exercice de Reprise d'Activité (PRA) basé sur une attaque réelle.
 
 ---
 
