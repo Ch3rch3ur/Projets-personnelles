@@ -116,6 +116,7 @@ L'infrastructure repose sur un modèle **reconstructible à la demande** :
 
 ### Client de test
 ✅ Client Linux Mint utilisé pour valider la résolution DNS split interne/externe (cf. `troubleshooting.md`)
+✅ Client Smartphone utilisé pour valider le fonctionnement de WireGuard (cf. `troubleshooting.md`)
 
 ---
 
