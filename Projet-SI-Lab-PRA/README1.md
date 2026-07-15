@@ -59,7 +59,11 @@ Assurer une **restauration fonctionnelle complète en moins de 10 minutes** apr�
 * **OS** : Debian 12/13 (CLI)
 * **Synchronisation** : quotidienne (1 fois par jour) via Restic (chiffrée)
 * **Sécurité** : SSH avec authentification par clé uniquement (pas de mot de passe)
-* **Rôle** : stockage externalisé des sauvegardes, protection contre la perte du serveur principal, la corruption des données et les attaques par ransomware
+* **Rôle** :
+  * stockage externalisé des sauvegardes
+  * protection contre la perte du serveur principal
+  * la corruption des données
+  * les attaques par ransomware
 
 #### ⚔️ Machine d'attaque (kali-attacker)
 * **OS** : Kali Linux
