@@ -88,6 +88,10 @@ L'infrastructure repose sur un modèle **reconstructible à la demande** :
 ---
 ## 📸 Topologie réseau
 
+![Schéma réseau](Diagrammes/Topologie-Réseau-SI-PRA.png)
+
+📁 [Voir la topologie détaillée →](Diagrammes/)
+
 ---
 
 ## ⚙️ Fonctionnalités réalisées
