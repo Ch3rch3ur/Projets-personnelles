@@ -86,6 +86,9 @@ L'infrastructure repose sur un modèle **reconstructible à la demande** :
 * Objectif : toute reconstruction d'un service passe uniquement par un playbook, jamais par une intervention manuelle
 
 ---
+## 📸 Topologie réseau
+
+---
 
 ## ⚙️ Fonctionnalités réalisées
 
