@@ -30,6 +30,18 @@ Ces projets reproduisent des **scénarios réalistes d'entreprise**, incluant :
 
 ## 📂 Projets principaux
 
+### 🛠️ SI-Lab — Infrastructure Debian résiliente avec Plan de Reprise d'Activité (PRA)
+
+Déploiement et administration d'une infrastructure Debian complète (DNS, Web, VPN, Firewall, Supervision, Sauvegarde) entièrement automatisée via **Ansible**, conçue pour être **reconstruite en moins de 10 minutes** après une panne ou une compromission. Le projet inclut un exercice **Red Team / Blue Team (PRA)** actuellement en cours, basé sur une véritable faille de sécurité découverte en production plutôt que sur un scénario artificiel injecté.
+
+**Technologies** : `Debian 12/13` `Ansible` `Ansible Vault` `Bind9` `Nginx` `WireGuard` `nftables` `Netdata` `Restic` `Kali Linux`
+
+**Compétences** : Infrastructure as Code • Administration systèmes Linux • Sécurité réseau (firewall, VPN) • Supervision temps réel • Sauvegarde chiffrée & PRA • Diagnostic méthodique
+
+📁 [Voir le projet complet →](./Projet-SI-Lab-PRA)
+
+---
+
 ### 🎫 Système ITSM GLPI avec Active Directory
 Déploiement d'un outil ITSM (GLPI) intégré à Active Directory via LDAP. Gestion de 20+ tickets d'incidents réalistes, configuration de SLA, et documentation de procédures support N1.
 
