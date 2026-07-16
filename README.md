@@ -12,13 +12,19 @@ Ces projets reproduisent des **scénarios réalistes d'entreprise**, incluant :
 * Virtualisation et Homelab
 * Services Linux et Windows Server
 * Séparation des privilèges utilisateurs / administrateurs
+* Automatisation et Infrastrucutre as Code
+* Supervision, sauvergarde et plan de reprise d'activité (PRA)
 
 ---
 
 ## 🧠 Compétences abordées
 
 * Administration Linux (Debian) et Windows Server
+* Automatisation et Infrastrucutre as Code : Ansible (rôles, playbooks, séparation des comptes de service), Ansible Vault (gestion des secrets)
 * Réseau & sécurité : pfSense, VPN, firewall, NAT
+* Supervision : Netdata (collecteurs 'go.d' personnalisés)
+* Sauvegarde & continuité d'activité : Restic (sauvegardes chiffrées, versionnées), conception et validation d'un Plan de Reprise d'Activité (PRA)
+* Sécurité offensive/défensive : exercices Red Team / Blue Team, reconnaissance réseau ('nmap'), analyse de misconfigurations réelles
 * Active Directory & authentification : Kerberos, SSSD, PAM
 * ITSM & Support : GLPI, ticketing, SLA, procédures N1/N2
 * Virtualisation & homelab multi-OS
