@@ -1,0 +1,11 @@
+[Interface]
+PrivateKey = {{ wg_android_private_key }}
+Address = {{ wg_android_client_ip }}/24
+DNS = 8.8.8.8, 1.1.1.1
+
+[Peer]
+PublicKey = {{ wg_public_key.stdout }}
+PresharedKey = {{ wg_android_psk }}
+Endpoint = {{ wg_server_public_endpoint }}:{{ wg_endpoint_port }}
+AllowedIPs = 0.0.0.0/0
+PersistentKeepalive = 25

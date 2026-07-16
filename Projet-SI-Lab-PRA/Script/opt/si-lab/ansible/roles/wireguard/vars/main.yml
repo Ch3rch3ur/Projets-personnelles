@@ -1,0 +1,12 @@
+wg_inferface: wg0
+wg_port: 47512
+wg_network: 10.10.0.0/24
+wg_server_ip: 10.10.0.1
+wg_endpoint_port: 47512
+
+# Tentative d'ajout client
+
+wg_android_client_ip: 10.10.0.2
+wg_android_client_name: android-phone
+# IP publique ou DNS de ton serveur WireGaurd
+wg_server_public_endpoint: 92.149.62.41

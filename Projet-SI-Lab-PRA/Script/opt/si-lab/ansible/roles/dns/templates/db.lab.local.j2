@@ -1,0 +1,12 @@
+$TTL     604800
+@        IN      SOA     ns.{{ dns_zone }}. admin.{{ dns_zone }}. (
+	 	 	 3
+			 604800
+			 86400
+			 2419200
+			 604800 )
+
+@	 IN	 NS	 ns.{{ dns_zone }}.
+ns	 IN	 A	 {{ dns_server_ip }}
+www	 IN	 A	 {{ dns_server_ip }}
+monitor  IN      A       {{ dns_server_ip }} 

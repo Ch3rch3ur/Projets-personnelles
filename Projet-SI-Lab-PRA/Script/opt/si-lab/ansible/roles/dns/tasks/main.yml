@@ -1,0 +1,36 @@
+- name: Installer bind9
+  apt:
+    name: bind9
+    state: present
+    update_cache: yes
+
+- name: Deployer named.conf.options
+  template:
+    src: named.conf.options.j2
+    dest: /etc/bind/named.conf.options
+  notify: Restart bind9
+
+- name: Deployer named.conf.local
+  template:
+    src: named.conf.local.j2
+    dest: /etc/bind/named.conf.local
+  notify: Restart bind9
+
+- name: Deployer zone locale
+  template:
+    src: db.lab.local.j2
+    dest: /etc/bind/db.{{ dns_zone }}
+    owner: bind
+    group: bind
+    mode: '0644'
+  notify: Restart bind9
+
+- name: Verifier la configuration Bind9
+  command: named-checkconf
+  changed_when: false
+
+- name: Activer et demarrer bind9
+  systemd:
+    name: named
+    enabled: yes
+    state: started

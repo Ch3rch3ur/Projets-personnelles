@@ -1,0 +1,5 @@
+zone "{{ dns_zone }}" {
+    type master;
+    file "/etc/bind/db.{{ dns_zone }}";
+    allow-update { none; };
+};

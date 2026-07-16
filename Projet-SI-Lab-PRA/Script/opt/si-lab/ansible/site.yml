@@ -1,0 +1,10 @@
+- hosts: server
+  become: true
+  vars:
+    wg_interface: wg0
+  roles:
+#    - netdata
+#    - nginx
+#    - wireguard 
+#    - restic
+    - firewall

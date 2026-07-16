@@ -1,0 +1,199 @@
+- name: Installer WireGuard
+  apt:
+    name:
+      - wireguard
+      - iptables
+      - qrencode # Pour générer le QR code Android
+    state: present
+    update_cache: yes
+
+- name: Creer le repertoire /etc/wireguard
+  file:
+    path: /etc/wireguard
+    state: directory
+    owner: root
+    group: root
+    mode: '0700'
+
+- name: Verifier si la cle privee existe
+  stat:
+    path: /etc/wireguard/privatekey
+  register: wg_private_key_stat
+
+- name: Generer la cle privee serveur
+  shell: wg genkey
+  register: wg_private_key
+  changed_when: false
+  when: not wg_private_key_stat.stat.exists # Ajout
+
+- name: Ecrire la cle privee serveur
+  copy:
+    content: "{{ wg_private_key.stdout }}"
+    dest: /etc/wireguard/privatekey
+    owner: root
+    group: root
+    mode: '0600'
+  when: not wg_private_key_stat.stat.exists # Ajout
+
+- name: Lire la cle privee serveur
+  slurp:
+    src: /etc/wireguard/privatekey
+  register: wg_private_key_file
+
+# Ajout 
+
+# On expose la clé privee serveur comme variable propre
+
+- name: Definir la cle privee serveur comme variable
+  set_fact:
+    wg_private_key:
+      stdout: "{{ wg_private_key_file.content | b64decode | trim }}"
+
+# Fin ajout
+
+- name: Generer la cle publique serveur
+  shell: "printf '%s' '{{ wg_private_key.stdout }}' | wg pubkey"
+  register: wg_public_key
+  changed_when: false
+
+- name: Ecrire la cle publique serveur
+  copy:
+    content: "{{ wg_public_key.stdout }}"
+    dest: /etc/wireguard/publickey
+    owner: root
+    group: root
+    mode: '0644'
+
+# ---- Cles client Android ---- Debut ajout ----
+
+- name: Verifier si la cle privee Android existe
+  stat:
+    path: "etc/wireguard/{{ wg_android_client_name }}-privatekey"
+  register: wg_android_private_key_stat
+
+- name: Generer la cle privee Android
+  shell: wg genkey
+  register: wg_android_private_key_generated
+  changed_when: false
+  when: not wg_android_private_key_stat.stat.exists
+
+- name: Ecrire la cle privee Android
+  copy:
+    content: "{{ wg_android_private_key_generated.stdout }}"
+    dest: "/etc/wireguard/{{ wg_android_client_name }}-privatekey"
+    owner: root
+    group: root
+    mode: '0600'
+  when: not wg_android_private_key_stat.stat.exists
+
+- name: Lire la cle privee Android
+  slurp:
+    src: "/etc/wireguard/{{ wg_android_client_name }}-privatekey"
+  register: wg_android_private_key_file
+
+- name: Definir la cle privee Android comme variable
+  set_fact:
+    wg_android_private_key: "{{ wg_android_private_key_file.content | b64decode | trim }}"
+
+- name: Generer la cle publique Android
+  shell: "printf '%s' '{{ wg_android_private_key }}' | wg pubkey"
+  register: wg_android_public_key
+  changed_when: false
+
+- name: Ecrire la cle publique Android
+  copy:
+    content: "{{ wg_android_public_key.stdout }}"
+    dest: "/etc/wireguard/{{ wg_android_client_name }}-publickey"
+    owner: root
+    group: root
+    mode: '0644'
+
+# ---- Generation des cles preshared (securite renforcee) ----
+
+- name: Verifier si la cle preshared Android
+  stat:
+    path: "/etc/wireguard/{{ wg_android_client_name }}-presharedkey"
+  register: wg_android_psk_stat
+
+- name: Generer la cle preshared Android
+  shell: wg genpsk
+  register: wg_android_psk_generated
+  changed_when: false
+  when: not wg_android_psk_stat.stat.exists
+
+- name: Ecrire la cle preshared Android
+  copy:
+    content: "{{ wg_android_psk_generated.stdout }}"
+    dest: "/etc/wireguard/{{ wg_android_client_name }}-presharedkey"
+    owner: root
+    group: root
+    mode: '0600'
+  when: not wg_android_psk_stat.stat.exists
+
+- name: Lire la cle preshared Android
+  slurp:
+    src: "/etc/wireguard/{{ wg_android_client_name }}-presharedkey"
+  register: wg_android_psk_file
+
+- name: Definir la cle preshared Android comme variable
+  set_fact:
+    wg_android_psk: "{{ wg_android_psk_file.content | b64decode | trim }}"
+
+# ---- Systeme ---- Fin d'ajout ----
+
+- name: Activer IP forwarding
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: '1'
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+- name: Deployer configuration WireGuard
+  template:
+    src: wg0.conf.j2
+    dest: "/etc/wireguard/wg0.conf"
+    owner: root
+    group: root
+    mode: '0600'
+  notify: Restart WireGuard
+
+- name: Activer et demarrer WireGuard
+  systemd:
+    name: "wg-quick@wg0"
+    enabled: yes
+    state: started
+
+# ---- Config client Android ----
+
+- name: Deployer le fichier de configuration Android
+  template:
+    src: client-android.conf.j2
+    dest: "/etc/wireguard/{{ wg_android_client_name }}.conf"
+    owner: root
+    group: root
+    mode: '0600'
+
+- name: Generer le QR code Android en PNG
+  shell: "qrencode -t png -r /etc/wireguard/{{ wg_android_client_name }}.conf -o /etc/wireguard/{{ wg_android_client_name }}-qrcode.png"
+#  shell: >-
+#    qrencode -t png
+#    -o /etc/wireguard/{{ wg_android_client_name }}-qrcode.png
+#    < /etc/wireguard/{{ wg_android_client_name }}.conf
+  changed_when: false
+
+- name: Recuperer le qr code PNG sur la machine Ansible
+  fetch:
+    src: "/etc/wireguard/{{ wg_android_client_name }}-qrcode.png"
+    dest: "/tmp/{{ wg_android_client_name }}-qrcode.png"
+    flat: yes
+
+- name: Afficher le QR code Android dans le terminal
+  shell: >
+    qrencode -t ansiutf8 < /etc/wireguard/{{ wg_android_client_name }}.conf
+  register: wg_android_qrcode
+  changed_when: false
+
+- name: Afficher le QR code Android
+  debug:
+    msg: "{{ wg_android_qrcode.stdout_lines }}"

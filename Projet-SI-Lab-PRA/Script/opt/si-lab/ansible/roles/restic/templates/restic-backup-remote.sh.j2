@@ -1,0 +1,24 @@
+#!/bin/bash
+set -e
+
+# Variables - chemins injectes par Ansible, mot de passe dans un fichier separe
+export RESTIC_REPOSITORY="{{ restic_remote_repository }}"
+export RESTIC_PASSWORD_FILE="{{ restic_password_file_remote }}" 
+
+SFTP_CMD="ssh -i {{ restic_ssh_key }} -o StrictHostKeyChecking=no {{ restic_remote_user }}@{{ restic_remote_host }} -s sftp"
+
+# Sauvegarde
+restic -o sftp.command="${SFTP_CMD}" backup \
+{% for path in restic_backup_paths %}
+    {{ path }} \
+{% endfor %}
+    --tag automated-remote \
+    --quiet
+
+# Nettoyage 
+restic -o sftp.command="${SFTP_CMD}" forget \
+    --keep-last {{ restic_keep_last }} \
+    --prune \
+    --quiet
+
+echo "Remote backup completed: $(date)"

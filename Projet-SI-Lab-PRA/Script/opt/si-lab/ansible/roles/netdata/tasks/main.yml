@@ -1,0 +1,41 @@
+- name: Installer depandences Netdata
+  apt:
+    name:
+      - wget
+      - bash
+      - curl
+    state: present
+    update_cache: yes
+
+- name: Verifier si Netdata est deja installer (service)
+  stat:
+    path: /etc/systemd/system/netdata.service
+  register: netdata_service
+
+- name: Telecharger le script d'installation Netdata
+  get_url:
+    url: https://get.netdata.cloud/kickstart.sh
+    dest: /tmp/netdata-install.sh
+    mode: '0755'
+  when: not netdata_service.stat.exists
+
+- name: Installer Netdata via script officiel
+  command: bash /tmp/netdata-install.sh --disable-telemetry --dont-wait --stable-channel --non-interactive
+  when: not netdata_service.stat.exists
+
+- name: Nettoyer le script d'installation
+  file:
+    path: /tmp/netdata-install.sh
+    state: absent
+
+- name: Activer et demarrer Netdata
+  systemd:
+    name: netdata
+    enabled: yes
+    state: started
+
+- name: Attendre que Netdata soit disponible
+  wait_for:
+    host: 127.0.0.1
+    port: 19999
+    timeout: 15

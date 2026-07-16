@@ -1,0 +1,12 @@
+restic_local_repository: "/opt/si-lab/backups"
+restic_remote_repository: "sftp:restic@192.168.1.61:/opt/si-lab/backups-remote" # a la maison 192.168.1.35
+restic_remote_host: "192.168.1.61" # a la masion 192.168.1.35
+restic_remote_user: "restic"
+restic_ssh_key: "/home/machine/.ssh/restic_backup"
+restic_password_file_local: "/home/machine/.restic-password"
+restic_password_file_remote: "/home/machine/.restic-password-remote"
+restic_backup_paths:
+  - /etc
+  - /var/www
+  - /etc/wireguard
+restic_keep_last: 7

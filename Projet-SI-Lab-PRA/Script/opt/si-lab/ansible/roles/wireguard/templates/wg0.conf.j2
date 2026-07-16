@@ -1,0 +1,16 @@
+[Interface]
+Address = {{ wg_server_ip }}/24
+ListenPort = {{ wg_port }}
+PrivateKey = {{ wg_private_key.stdout }}
+# SaveConfig = true
+
+# PostUp et PostDown pour le NAT
+
+PostUp = iptables -A FORWARD -i {{ wg_interface }} -j ACCEPT; iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
+PostDown = iptables -D FORWARD -i {{ wg_interface }} -j ACCEPT; iptables -t nat -D POSTROUTING -o enp0s3 -j MASQUERADE
+
+# Peer : Android
+[Peer]
+PublicKey = {{ wg_android_public_key.stdout }}
+PresharedKey = {{ wg_android_psk }}
+AllowedIPs = {{ wg_android_client_ip }}/32

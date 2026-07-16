@@ -1,0 +1,20 @@
+#!/bin/bash
+set -e
+
+# Variables - chemins injectes par Ansible
+export RESTIC_REPOSITORY="{{ restic_local_repository }}"
+export RESTIC_PASSWORD_FILE="{{ restic_password_file_local }}"
+
+# Sauvegarde 
+restic backup \
+{% for path in restic_backup_paths %}
+    {{ path }} \
+{% endfor %}
+    --exclude='/etc/ssl/private' \
+    --tag automated \
+    --quiet
+
+# Nettoyage (garder {{ restic_keep_last }} dernieres sauvegarde)
+restic forget --keep-last {{ restic_keep_last }} --prune --quiet
+
+echo "Backup completed: $(date)"

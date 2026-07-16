@@ -1,0 +1,31 @@
+- name: Deployer le fichier de mot de passe local
+  ansible.builtin.copy:
+    content: "{{ vault_restic_password_local }}"
+    dest: "{{ restic_password_file_local }}"
+    owner: machine # Test avec machine mais on utiliseras ansible
+    group: root
+    mode: '0600' # lecture seule pour ansible uniquement
+
+- name: Deployer le fichier de mot de passe remote
+  ansible.builtin.copy:
+    content: "{{ vault_restic_password_remote }}"
+    dest: "{{ restic_password_file_remote }}"
+    owner: machine # Test avec machine mais on utiliseras ansible
+    group: root
+    mode: '0600'
+
+- name: Deployer le script restic-backup
+  ansible.builtin.template:
+    src: restic-backup.sh.j2
+    dest: /usr/local/bin/restic-backup.sh
+    owner: machine # Test avec machine mais on utiliseras ansible
+    group: root
+    mode: '0750' # executable, mais pas lisible par tous
+
+- name: Deployer le script restic-backup-remote
+  ansible.builtin.template:
+    src: restic-backup-remote.sh.j2
+    dest: /usr/local/bin/restic-backup-remote.sh
+    owner: machine # Test avec machine mais on utiliseras ansible
+    group: root
+    mode: '0750'

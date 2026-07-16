@@ -1,0 +1,129 @@
+### script start ###
+
+- name: Installer Nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+# Ajout de HTTPS
+
+- name: Creation du dossier SSL
+  file:
+    path: /etc/nginx/ssl
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Generation du certificat auto-signe
+  command: >
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048
+    -keyout /etc/nginx/ssl/nginx.key
+    -out /etc/nginx/ssl/nginx.crt
+    -subj "/CN={{ nginx_server_name }}"
+  args:
+    creates: /etc/nginx/ssl/nginx.crt
+
+- name: Permissions certificat
+  file:
+    path: /etc/nginx/ssl/nginx.key
+    mode: '0600'
+
+# Deployer la page web avant le config nginx
+
+- name: Deployer page HTML
+  copy:
+    src: index.html
+    dest: "{{ nginx_root }}/index.html"
+    owner: www-data
+    group: www-data
+    mode: '0644'
+
+# Deployer configs (fichiers uniquement pas encore activer)
+
+- name: Deployer configuration VirtualHost
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/sites-available/site.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Deployer configuration Netdata reverse proxy
+  template:
+    src: netdata.j2
+    dest: /etc/nginx/sites-available/netdata
+    owner: root
+    group: root
+    mode: '0644'
+
+# Supprimer default
+
+- name: Supprimer site default
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+# Supprime les anciens liens (au cas ou)
+
+- name: Supprimer ancien lien site principal
+  file:
+    path: /etc/nginx/sites-enabled/site.conf
+    state: absent
+
+- name: Supprimer ancien lien Netdata
+  file:
+    path: /etc/nginx/sites-enabled/netdata
+    state: absent
+
+# TESTER la config AVANT d'activer les sites
+
+- name: Tester configuration nginx (av. actif)
+  command: sudo nginx -t
+  register: nginx_test_before
+  changed_when: false
+  failed_when: false # Ne pas échouer ici, juste enregistrer
+
+- name: Afficher resultat test nginx
+  debug:
+    msg: "{{ nginx_test_before.stderr }}"
+  when: nginx_test_before.rc != 0
+
+# Activer sites seulement si les fichiers sont valides
+
+- name: Activer simple page Web
+  file:
+    src: /etc/nginx/sites-available/site.conf
+    dest: /etc/nginx/sites-enabled/site.conf
+    state: link
+  when: nginx_test_before.rc == 0
+
+- name: Activer Netdata
+  file:
+    src: /etc/nginx/sites-available/netdata
+    dest: /etc/nginx/sites-enabled/netdata
+    state: link
+  when: nginx_test_before.rc == 0
+
+# Validation (verification)
+
+- name: Verifier configuration Nginx
+  command: sudo nginx -t
+  register: nginx_test
+  changed_when: false
+  failed_when: nginx_test.rc != 0
+
+# Reload
+
+- name: Reload Nginx
+  systemd:
+    name: nginx
+    state: reloaded
+  when: nginx_test.rc == 0
+
+- name: Activer et demarrer nginx
+  systemd:
+    name: nginx
+    enabled: yes
+    state: started

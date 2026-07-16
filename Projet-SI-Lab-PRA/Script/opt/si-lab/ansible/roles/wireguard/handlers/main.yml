@@ -1,0 +1,5 @@
+- name: Restart WireGuard
+  service:
+    name: "wg-quick@{{ wg_interface }}"
+    state: restarted
+    enabled: true

@@ -1,0 +1,56 @@
+- name: Installer nftables
+  apt:
+    name: nftables
+    state: present
+    update_cache: yes
+
+- name: Deployer configuration nftables
+  copy:
+    dest: /etc/nftables.conf
+    content: |
+      flush ruleset
+
+      table inet filter {
+        chain input {
+          type filter hook input priority 0;
+          policy drop;
+
+          iif lo accept
+          ct state established,related accept
+          # SSH (limite)
+          tcp dport 22 ip saddr 192.168.1.0/24 limit rate 10/minute accept
+          tcp dport {80, 443} accept # HTTP & HTTPS
+          tcp dport 53 ip saddr 192.168.1.0/24 accept # Authorisation pour DNS TCP
+          udp dport 53 ip saddr 192.168.1.0/24 accept # Authorisation pour DNS UDP
+          icmp type echo-request ip saddr 192.168.1.0/24 accept # Authorise ICMP
+          udp dport 47512 accept
+          tcp flags syn limit rate 50/second accept # Protection scan (SYN flood / scan)
+          log prefix "DROP INPUT: " flags all counter drop
+
+          # Autoriser VPN meme si interface absente au boot
+          # iifname "wg0" tcp dport {22,80,443} accept
+        }
+
+        chain forward {
+            type filter hook forward priority 0;
+            policy drop;
+
+            ct state established,related accept
+            # VPN -> Internet
+            iifname "wg0" oifname "enp0s3" accept
+            log prefix "DROP FORWARD: " flags all counter drop
+        }
+
+        chain output {
+          type filter hook output priority 0;
+          policy accept;
+        }
+      }
+
+
+- name: Activation nftables
+  systemd:
+    name: nftables
+    enabled: yes
+    state: started
+  notify: Restart nftables
