@@ -144,6 +144,23 @@ Au cours du projet, plusieurs incidents ont nécessité une approche méthodique
 * **Ansible** : plusieurs bugs itératifs lors de l'extension du rôle WireGuard pour supporter un client Android avec génération de QR code
 * **Netdata** : alertes de santé personnalisées silencieusement ignorées malgré l'utilisation correcte du mot-clé `template:` — 🔄 **problème en cours de résolution**
 
+---
+
+
+Au cours du projet, plusieurs incidents ont nécessité une approche méthodique de diagnostic et de résolution :
+ 
+* **Installation Ansible** : échec via APT/DPKG, résolu par une installation via `pip`
+* **Ansible (rôles & playbooks)** : nombreuses erreurs de jeunesse (fautes de frappe, variables mal résolues, ordre des tâches incorrect, handlers trop tôt) corrigées par l'ajout progressif de mécanismes de validation (`stat`, `register`, `fail`, `debug`, `creates`)
+* **nftables** : service en échec au redémarrage à cause d'une règle référençant l'interface `wg0` avant sa création par WireGuard (ordre de démarrage), et une règle de limitation de débit SYN trop permissive annulant de fait la politique `drop` par défaut
+* **DNS / Bind9** : bloc `statistics-channels` mal placé (imbriqué dans `options {}`) provoquant un échec de `named-checkconf` ; ICMP et port 53 bloqués en entrant faute de règles nftables dédiées ; résolution DNS split incorrecte côté client Linux Mint (ancienne configuration, IPv6 prioritaire, domaine de recherche absent), corrigée via `ipv4.dns-search lab.local` et désactivation d'IPv6
+* **WireGuard** : absence de handshake causée par une IP publique incorrecte dans la configuration client ; plusieurs bugs Ansible lors du déploiement du rôle (lecture de clé, nom d'interface, IP forwarding)
+* **QR Code (client Android)** : rendu illisible en terminal Debian (caractères Unicode non gérés) — résolu par une génération en `.png` publiée via le serveur web
+* **Netdata** : installation bloquée par plusieurs obstacles successifs (accès réseau, dépôts APT non supportés), résolue via le script officiel `kickstart.sh` ; alertes de santé personnalisées ne se déclenchant pas — 🔄 **problème en cours de résolution**
+* **Nginx / HTTPS** : VirtualHosts mal séparés (Netdata masquant le site principal), liens symboliques cassés, certificats SSL jamais recréés lors d'un redéploiement Ansible complet
+* **Restic (local & distant)** : permissions incorrectes (fichiers sensibles, snapshots, SSH/SFTP), syntaxe `RESTIC_SFTP_COMMAND` incorrecte, résolution d'hôte échouant sous sudo
+* **Ansible Vault** : mot de passe Restic en clair dans les scripts, fichier `vault.yml` illisible après création via sudo — corrigés par `RESTIC_PASSWORD_FILE` chiffré et séparation stricte des comptes de service
+
+
 👉 **Détails techniques complets** : [troubleshooting.md](troubleshooting.md)
 
 ---
