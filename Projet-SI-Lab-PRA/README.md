@@ -191,6 +191,3 @@ Au cours du projet, plusieurs incidents ont nécessité une approche méthodique
 * Mesurer et documenter le temps de restauration réel (objectif : < 10 minutes)
 * Ajouter le retour d'expérience du PRA (scénario d'attaque, chronologie, résultats) à ce document
 
----
-
-👉 **Guide de dépannage détaillé** : [troubleshooting.md](troubleshooting.md)
