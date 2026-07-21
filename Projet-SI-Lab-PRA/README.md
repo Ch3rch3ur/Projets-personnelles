@@ -136,18 +136,6 @@ L'infrastructure repose sur un modèle **reconstructible à la demande** :
 ## 🐛 Principaux défis techniques
 
 Au cours du projet, plusieurs incidents ont nécessité une approche méthodique de diagnostic et de résolution :
-
-* **nftables** : une règle de limitation de débit sur les paquets SYN, placée en fin de chaîne `input`, acceptait en réalité tout paquet SYN indépendamment du port visé — annulant de fait la politique `drop` par défaut
-* **WireGuard** : absence de handshake côté client, causée par une IP publique incorrecte dans la configuration
-* **Bind9** : bloc `statistics-channels` mal placé (imbriqué dans `options {}` au lieu d'être déclaré au niveau racine), provoquant un échec de `named-checkconf`
-* **systemd-resolved** : résolution DNS split (interne/externe) incorrecte sur un client de test Linux Mint, nécessitant la déclaration explicite du domaine de recherche (`ipv4.dns-search lab.local`)
-* **Ansible** : plusieurs bugs itératifs lors de l'extension du rôle WireGuard pour supporter un client Android avec génération de QR code
-* **Netdata** : alertes de santé personnalisées silencieusement ignorées malgré l'utilisation correcte du mot-clé `template:` — 🔄 **problème en cours de résolution**
-
----
-
-
-Au cours du projet, plusieurs incidents ont nécessité une approche méthodique de diagnostic et de résolution :
  
 * **Installation Ansible** : échec via APT/DPKG, résolu par une installation via `pip`
 * **Ansible (rôles & playbooks)** : nombreuses erreurs de jeunesse (fautes de frappe, variables mal résolues, ordre des tâches incorrect, handlers trop tôt) corrigées par l'ajout progressif de mécanismes de validation (`stat`, `register`, `fail`, `debug`, `creates`)
@@ -159,7 +147,6 @@ Au cours du projet, plusieurs incidents ont nécessité une approche méthodique
 * **Nginx / HTTPS** : VirtualHosts mal séparés (Netdata masquant le site principal), liens symboliques cassés, certificats SSL jamais recréés lors d'un redéploiement Ansible complet
 * **Restic (local & distant)** : permissions incorrectes (fichiers sensibles, snapshots, SSH/SFTP), syntaxe `RESTIC_SFTP_COMMAND` incorrecte, résolution d'hôte échouant sous sudo
 * **Ansible Vault** : mot de passe Restic en clair dans les scripts, fichier `vault.yml` illisible après création via sudo — corrigés par `RESTIC_PASSWORD_FILE` chiffré et séparation stricte des comptes de service
-
 
 👉 **Détails techniques complets** : [troubleshooting.md](troubleshooting.md)
 
