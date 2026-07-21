@@ -4,8 +4,6 @@
 
 Ce document recense les incidents réellement rencontrés lors de la conception de l'infrastructure SI-Lab (Ansible, réseau, DNS, VPN, firewall, supervision, sauvegarde), ainsi que les causes identifiées et les solutions appliquées.
 
-> **Note de version** : ce document remplace une version précédente qui contenait deux points construits par extrapolation plutôt que documentés (le placement exact de `statistics-channels` et le statut de l'incident Netdata). Cette version se base uniquement sur les journaux de session et les notes centralisées.
-
 ---
 
 ## 📌 Synthèse rapide
