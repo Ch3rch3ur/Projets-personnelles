@@ -42,7 +42,7 @@ Assurer une **restauration fonctionnelle complète en moins de 10 minutes** apr�
 **Composants de l'infrastructure :**
 
 #### 🖥️ Serveur de production (srv-prod — `192.168.1.32`)
-* **OS** : Debian 12/13 (CLI)
+* **OS** : Debian 13 (CLI)
 * **Services hébergés** :
   * DNS (Bind9)
   * Web (Nginx)
@@ -56,7 +56,7 @@ Assurer une **restauration fonctionnelle complète en moins de 10 minutes** apr�
 * **Rôle** : fournir les services critiques et permettre une restauration rapide (PRA)
 
 #### 💾 Serveur de sauvegarde distant (srv-backup — `192.168.1.33`)
-* **OS** : Debian 12/13 (CLI)
+* **OS** : Debian 13 (CLI)
 * **Synchronisation** : quotidienne (1 fois par jour) via Restic (chiffrée)
 * **Sécurité** : SSH avec authentification par clé uniquement (pas de mot de passe)
 * **Rôle** :
