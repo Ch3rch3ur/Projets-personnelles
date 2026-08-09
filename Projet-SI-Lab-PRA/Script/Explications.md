@@ -176,3 +176,52 @@ Dans ce projet, ce dossier reste peu utilisé : l'infrastructure repose principa
 
 ---
 
+# 2. Premier playbook
+
+## Objectif
+
+Centraliser le déploiement de tous les services dans un point d'entrée unique : `site.yml`.
+
+---
+
+## Structure
+
+```yaml
+- hosts: localhost
+  become: true
+  vars:
+    wg_interface: wg0
+  roles:
+    - bind9
+    - nginx
+    - wireguard
+    - nftables
+    - netdata
+    - restic
+```
+
+`site.yml` se contente d'appeler successivement chacun des rôles, la logique de chaque service reste entièrement dans son rôle (cf. partie 1). Pour ne modifier que le serveur Web par exemple, seul le rôle `nginx` est concerné, sans toucher au reste du fichier.
+
+---
+
+## Lancement
+
+```bash
+ansible-playbook -i inventory/hosts site.yml --ask-vault-pass
+```
+
+`--ask-vault-pass` est nécessaire dès que le playbook touche à `group_vars/all/vault.yml` (mot de passe Restic notamment), sans cette option, l'exécution échoue dès qu'une variable chiffrée est requise. Une alternative pour l'automatisation (cron, CI) est `--vault-password-file`, qui évite la saisie manuelle.
+
+---
+
+## Vérification
+
+Un simple `systemctl status <service>` confirme qu'un service tourne, mais pas que le déploiement a été propre. Le vrai test de cette architecture est l'**idempotence** : relancer `site.yml` une seconde fois ne doit provoquer **aucun changement** :
+
+```bash
+ansible-playbook site.yml --ask-vault-pass
+```
+PLAY RECAP
+localhost : ok=24 changed=0 unreachable=0 failed=0
+
+Un `changed` différent de 0 sur un second run signale une tâche non idempotente (cf. les corrections apportées en partie 1 — `stat`, `creates`, etc.) plutôt qu'un déploiement réellement stable.
