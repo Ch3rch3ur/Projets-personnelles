@@ -31,6 +31,7 @@ Exemple :
 ```
 localhost ansible_connection=local
 ```
+Dans notre cas 
 
 ---
 
