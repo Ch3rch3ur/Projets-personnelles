@@ -37,7 +37,7 @@ Dans ce projet, nous avons intégré ce fichier car les tâches Ansible s'exécu
 Exemple avec SSH si la machine était distante :
 
 ```
-serveur_prod ansible_host=192.168.1.33 ansible_user=ansible
+serveur_prod ansible_host=192.168.1.32 ansible_user=ansible
 ```
 ---
 
@@ -48,17 +48,16 @@ Chaque rôle correspond à un service indépendant.
 Exemple :
 
 ```
-bind9/
 
-nginx/
+/opt/si-lab/ansible/roles/
+│
+├── bind9/
+├── nginx/
+├── wireguard/
+├── nftables/
+├── netdata/
+├── restic/
 
-wireguard/
-
-nftables/
-
-netdata/
-
-restic/
 ```
 
 Chaque rôle possède sa propre configuration.
