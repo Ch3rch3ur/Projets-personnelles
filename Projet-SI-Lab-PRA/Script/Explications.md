@@ -137,47 +137,50 @@ Si le fichier généré est identique à celui déjà en place, la tâche `templ
 
 ### files/
 
-Contient les fichiers copiés tels quels.
+Contient les fichiers déployés **tels quels**, sans traitement ni variable — à la différence de `templates/`, aucune substitution n'est effectuée.
 
-Exemple :
+Exemple dans le rôle `nginx` :
 
-```
-index.html
-```
+files/index.html → /var/www/html/index.html
+
+Ce dossier est réservé aux fichiers statiques (pages HTML, scripts, clés publiques, binaires) qui ne dépendent d'aucune variable d'environnement.
 
 ---
 
 ### vars/
 
-Contient les variables propres au rôle.
+Contient les variables **propres à un rôle**, avec leurs valeurs par défaut. Elles sont ensuite réutilisées dans les tâches et les templates du même rôle.
 
-Exemple :
+Exemple pour le rôle `nginx` :
 
+```yaml
+# vars/main.yml
+nginx_server_name: "srv-prod.lab.local"
+nginx_root: "/var/www/html"
+nginx_listen_port: 80
 ```
-nginx_server_name
 
-nginx_root
-
-nginx_listen_port
-```
-
-Ces variables rendent le rôle facilement réutilisable.
+En centralisant ces valeurs à un seul endroit plutôt qu'en les codant en dur dans les tâches, un rôle reste réutilisable tel quel sur une autre machine ou un autre projet — il suffit de surcharger ces variables (via `group_vars/` ou `host_vars/`) sans toucher au rôle lui-même.
 
 ---
 
 ### group_vars/
 
-Variables communes à tous les hôtes.
+Contient les variables **communes à un ensemble d'hôtes** (ou à tous, via `group_vars/all/`) — elles priment sur les valeurs par défaut définies dans `vars/` de chaque rôle.
 
-Ce dossier est également utilisé pour stocker les variables chiffrées avec Ansible Vault.
+C'est également ici que sont stockées les variables sensibles, chiffrées avec **Ansible Vault** :
+
+group_vars/all/vault.yml
+
+Exemple : le mot de passe utilisé par Restic pour chiffrer les sauvegardes y est stocké chiffré, plutôt qu'en clair dans un script ou un rôle.
 
 ---
 
 ### host_vars/
 
-Variables spécifiques à une machine.
+Contient les variables propres à **une seule machine**, avec la même logique de priorité que `group_vars/` mais à l'échelle d'un hôte précis.
 
-Dans ce projet, ce dossier est peu utilisé car l'infrastructure repose principalement sur une seule machine de production.
+Dans ce projet, ce dossier reste peu utilisé : l'infrastructure repose principalement sur une seule machine de production (`srv-prod`), ce qui limite le besoin de différencier les variables par hôte. Il prendrait davantage de sens avec l'ajout d'un second serveur (par exemple `srv-backup`) nécessitant des valeurs spécifiques (adresse IP, nom de domaine, rôle réseau).
 
 # 2. Premier playbook
 
