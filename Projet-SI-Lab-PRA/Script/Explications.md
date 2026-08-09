@@ -45,8 +45,6 @@ serveur_prod ansible_host=192.168.1.32 ansible_user=ansible
 
 Chaque rôle correspond à un service indépendant.
 
-Exemple :
-
 ```
 
 /opt/si-lab/ansible/roles/
