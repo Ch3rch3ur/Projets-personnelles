@@ -32,7 +32,7 @@ Exemple :
 localhost ansible_connection=local
 ```
 
-Dans ce projet, nous avons intégré ce fichier car les tâches Ansible s'exécutent **localement** sur la machine, afin de répondre aux besoins spécifiques du projet.
+Même en local, `ansible-playbook` a besoin d'une source d'inventaire pour s'exécuter, et `group_vars/` en dépend (les variables communes sont rattachées à des groupes d'hôtes définis ici). Ce fichier prépare aussi l'ajout futur d'un second hôte (par exemple `srv-backup`) sans restructurer le projet.
 
 Exemple avec SSH, si la machine était distante :
 
