@@ -31,8 +31,14 @@ Exemple :
 ```
 localhost ansible_connection=local
 ```
-7
 
+Dans ce projet, nous avons intégré ce fichier car les tâches Ansible s'exécutent **localement** sur la machine, afin de répondre aux besoins spécifiques du projet.
+
+Exemple avec SSH si la machine était distante :
+
+```
+serveur_prod ansible_host=192.168.1.33 ansible_user=ansible
+```
 ---
 
 ### roles/
