@@ -147,9 +147,9 @@ Exemple pour le rôle `nginx` :
 
 ```yaml
 # vars/main.yml
-nginx_server_name: "srv-prod.lab.local"
-nginx_root: "/var/www/html"
 nginx_listen_port: 80
+nginx_server_name: _
+nginx_root: /var/www/html
 ```
 
 En centralisant ces valeurs à un seul endroit plutôt qu'en les codant en dur dans les tâches, un rôle reste réutilisable tel quel sur une autre machine ou un autre projet — il suffit de surcharger ces variables (via `group_vars/` ou `host_vars/`) sans toucher au rôle lui-même.
