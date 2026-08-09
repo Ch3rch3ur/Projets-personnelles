@@ -111,7 +111,7 @@ Un même template peut ainsi générer des configurations différentes selon la 
 
 Un handler évite de redémarrer inutilement un service.
 
-Un handler est une tâche qui ne s'exécute **que si une autre tâche a provoqué un changement** — jamais de manière systématique. Il est déclenché via `notify` depuis une tâche classique.
+Un handler est une tâche qui ne s'exécute **que si une autre tâche a provoqué un changement** jamais de manière systématique. Il est déclenché via `notify` depuis une tâche classique.
 
 Exemple concret dans le rôle `nginx` :
 
