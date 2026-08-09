@@ -135,7 +135,7 @@ Exemple dans le rôle `nginx` :
 
 files/index.html → /var/www/html/index.html
 
-Ce dossier est réservé aux fichiers statiques (pages HTML, scripts, clés publiques, binaires) qui ne dépendent d'aucune variable d'environnement.
+Ce dossier est réservé aux fichiers statiques (pages HTML, scripts) qui ne dépendent d'aucune variable d'environnement.
 
 ---
 
