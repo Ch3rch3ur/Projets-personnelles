@@ -31,7 +31,7 @@ Exemple :
 ```
 localhost ansible_connection=local
 ```
-Dans notre cas 
+7
 
 ---
 
@@ -42,8 +42,6 @@ Chaque rôle correspond à un service indépendant.
 Exemple :
 
 ```
-roles/
-
 bind9/
 
 nginx/
