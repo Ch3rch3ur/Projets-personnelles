@@ -58,15 +58,7 @@ Chaque rôle correspond à un service indépendant.
 
 ```
 
-Chaque rôle possède sa propre configuration.
-
-```
-tasks/
-templates/
-handlers/
-files/
-vars/
-```
+Chaque rôle possède les sous dossiers nécessaires à son fonctionnement (```tasks/```, ```templates/```, ```handlers/```, ```files/```, ```vars/``` selon les besoins).
 
 Cette organisation permet de modifier un service sans impacter les autres.
 
