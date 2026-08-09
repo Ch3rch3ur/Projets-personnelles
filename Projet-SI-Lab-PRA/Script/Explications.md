@@ -219,7 +219,7 @@ ansible-playbook -i inventory/hosts site.yml --ask-vault-pass
 Un simple `systemctl status <service>` confirme qu'un service tourne, mais pas que le déploiement a été propre. Le vrai test de cette architecture est l'**idempotence** : relancer `site.yml` une seconde fois ne doit provoquer **aucun changement** :
 
 ```bash
-ansible-playbook site.yml --ask-vault-pass
+ansible-playbook -i inventory/hosts site.yml --ask-vault-pass
 ```
 PLAY RECAP
 localhost : ok=24 changed=0 unreachable=0 failed=0
