@@ -4,7 +4,7 @@
 
 Structurer le projet Ansible afin de séparer clairement les rôles, les variables, les fichiers de configuration et les playbooks.
 
-L'utilisation d'une arborescence normalisée facilite la maintenance, l'évolution du projet et la réutilisation des rôles.
+Ce n'est pas un choix par défaut : les premiers rôles avaient été développés sans réelle séparation ni validation, ce qui a directement causé plusieurs incidents (cf. `troubleshooting.md`). Cette arborescence normalisée est la réponse structurelle à ce constat, détaillée section par section ci-dessous.
 
 ---
 
