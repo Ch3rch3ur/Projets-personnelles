@@ -182,6 +182,8 @@ Contient les variables propres à **une seule machine**, avec la même logique d
 
 Dans ce projet, ce dossier reste peu utilisé : l'infrastructure repose principalement sur une seule machine de production (`srv-prod`), ce qui limite le besoin de différencier les variables par hôte. Il prendrait davantage de sens avec l'ajout d'un second serveur (par exemple `srv-backup`) nécessitant des valeurs spécifiques (adresse IP, nom de domaine, rôle réseau).
 
+---
+
 # 2. Premier playbook
 
 ## Objectif
