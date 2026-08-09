@@ -62,8 +62,8 @@ Chaque rôle possède sa propre configuration.
 
 ```
 tasks/
-handlers/
 templates/
+handlers/
 files/
 vars/
 ```
@@ -85,37 +85,53 @@ Exemple :
 
 ---
 
-### handlers/
+### templates/
 
-Contient les actions exécutées uniquement lorsqu'un changement est détecté.
+Contient les fichiers **Jinja2** (`.j2`), c'est-à-dire des fichiers de configuration dans lesquels certaines valeurs sont remplacées dynamiquement par des variables au moment du déploiement.
 
-Exemple :
+Exemple avec le rôle `nginx` :
 
 ```
-Restart nginx
+templates/nginx.conf.j2  →  /etc/nginx/sites-available/site.conf
 ```
 
-Un handler évite de redémarrer inutilement un service.
+```jinja2
+server {
+    listen {{ nginx_listen_port }};
+    server_name {{ nginx_server_name }};
+    root {{ nginx_root }};
+}
+```
+
+Un même template peut ainsi générer des configurations différentes selon la machine ou l'environnement, simplement en changeant les variables associées — c'est ce qui permet, par exemple, au rôle `wireguard` de générer un fichier de configuration client différent pour chaque pair sans dupliquer le fichier lui-même.
 
 ---
 
-### templates/
+### handlers/
 
-Contient les fichiers Jinja2.
+Un handler évite de redémarrer inutilement un service.
 
-Ils permettent de générer automatiquement les fichiers de configuration.
+Un handler est une tâche qui ne s'exécute **que si une autre tâche a provoqué un changement** — jamais de manière systématique. Il est déclenché via `notify` depuis une tâche classique.
 
-Exemple :
+Exemple concret dans le rôle `nginx` :
 
+```yaml
+- name: Déployer la configuration du VirtualHost
+  template:
+    src: site.conf.j2
+    dest: /etc/nginx/sites-available/site.conf
+  notify: Restart nginx
 ```
-nginx.conf.j2
+
+```yaml
+# handlers/main.yml
+- name: Restart nginx
+  service:
+    name: nginx
+    state: restarted
 ```
 
-qui devient
-
-```
-/etc/nginx/sites-available/site.conf
-```
+Si le fichier généré est identique à celui déjà en place, la tâche `template` ne remonte aucun changement, et le handler ne se déclenche pas — Nginx n'est donc jamais redémarré inutilement. C'est ce mécanisme qui permet de relancer `site.yml` en confiance sans provoquer de coupures de service à chaque exécution.
 
 ---
 
